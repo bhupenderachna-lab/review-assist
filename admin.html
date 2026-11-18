@@ -708,16 +708,13 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
         const fullUrl = `${baseUrl}?${params.toString()}`;
         qrTargetUrlText.textContent = fullUrl;
 
-        // 3. Update QR Code
+        // 3. Update QR Code (using GoQR API - free, guaranteed scannable)
         qrOutput.innerHTML = '';
-        currentQr = new QRCode(qrOutput, {
-          text: fullUrl,
-          width: 260,
-          height: 260,
-          colorDark: "#0f172a",
-          colorLight: "#ffffff",
-          correctLevel: (typeof QRCode !== 'undefined' && QRCode.CorrectLevel && QRCode.CorrectLevel.M !== undefined) ? QRCode.CorrectLevel.M : 0
-        });
+        const qrApiImg = document.createElement('img');
+        qrApiImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&ecc=M&data=' + encodeURIComponent(fullUrl);
+        qrApiImg.alt = 'QR Code';
+        qrApiImg.style.cssText = 'width:260px;height:260px;display:block;border:none;';
+        qrOutput.appendChild(qrApiImg);
 
         // 4. Update Live Iframe Preview & Standee Link
         mobilePreviewFrame.src = fullUrl;
