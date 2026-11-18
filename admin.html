@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin &amp; QR Setup Generator - Review Assistant</title>
+  <style>
+    :root {
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-height: 100vh;
+      height: auto !important;
+      overflow-x: hidden !important;
+      overflow-y: auto !important; /* ENABLE FULL VERTICAL SCROLLING */
+      background: #f1f5f9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      display: block !important;
+    }
+
+    body {
+      padding: 24px 16px 80px;
+    }
+    .admin-wrapper {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .admin-header {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .admin-header h1 {
+      font-size: 22px;
+      color: #0f172a;
+      font-weight: 800;
+    }
+    .admin-header p {
+      color: #64748b;
+      font-size: 13.5px;
+      margin-top: 3px;
+    }
+    .btn-view-app {
+      background: #2563eb;
+      color: #fff;
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 13.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .admin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 900px) {
+      .admin-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .admin-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+    .admin-card h2 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 12px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      font-size: 13.5px;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: inherit;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      border-color: #2563eb;
+    }
+    .form-hint {
+      font-size: 11.5px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .color-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .color-input {
+      width: 48px !important;
+      height: 38px;
+      padding: 2px !important;
+      cursor: pointer;
+    }
+
+    /* QR Display Box */
+    .qr-preview-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: #f8fafc;
+      border: 1.5px dashed #cbd5e1;
+      border-radius: var(--radius-lg);
+      margin-bottom: 16px;
+    }
+    #qrOutput {
+      background: #ffffff;
+      padding: 14px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #qrOutput canvas {
+      display: block;
+      max-width: 200px;
+      height: auto;
+    }
+    .qr-target-url {
+      font-size: 12px;
+      color: #475569;
+      word-break: break-all;
+      text-align: center;
+      margin-top: 12px;
+      background: #ffffff;
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      max-width: 100%;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn-secondary {
+      background: #f1f5f9;
+      color: #1e293b;
+      border: 1px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+    .btn-secondary:hover {
+      background: #e2e8f0;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    /* Live Preview Frame */
+    .preview-frame-container {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #cbd5e1;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      background: #ffffff;
+    }
+    .preview-frame-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .output-json {
+      background: #0f172a;
+      color: #38bdf8;
+      padding: 14px;
+      border-radius: var(--radius-md);
+      font-family: monospace;
+      font-size: 12px;
+      white-space: pre-wrap;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    /* Toast Notification Banner */
+    .toast-pill {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .toast-pill.visible {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Onboarded Directory Section */
+    .directory-card {
+      margin-top: 28px;
+    }
+    .directory-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+    }
+    .directory-header h2 {
+      border: none !important;
+      margin-bottom: 0 !important;
+      padding-bottom: 0 !important;
+    }
+    .badge-count {
+      background: #eff6ff;
+      color: #2563eb;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid #bfdbfe;
+    }
+    .directory-toolbar {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+    .search-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 9px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      outline: none;
+    }
+    .filter-select {
+      width: auto !important;
+      min-width: 150px;
+      padding: 9px 12px;
+      border: 1.5px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      font-size: 13px;
+      outline: none;
+    }
+    .directory-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .client-item-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      transition: all 0.15s;
+    }
+    .client-item-card:hover {
+      border-color: #cbd5e1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .client-info-col {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+    .client-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .client-meta {
+      min-width: 0;
+    }
+    .client-name-title {
+      font-size: 14.5px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .category-badge-sm {
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 6px;
+      text-transform: uppercase;
+    }
+    .cat-restaurant { background: #fee2e2; color: #b91c1c; }
+    .cat-hotel { background: #e0e7ff; color: #4338ca; }
+    .client-address-sub {
+      font-size: 11.5px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+    .client-actions-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .btn-sm-action {
+      background: #ffffff;
+      color: #334155;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 6px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-sm-action:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+    .btn-sm-action.primary {
+      background: #2563eb;
+      color: #ffffff;
+      border-color: #2563eb;
+    }
+    .btn-sm-action.primary:hover {
+      background: #1d4ed8;
+    }
+    .btn-sm-action.delete {
+      color: #ef4444;
+      border-color: #fca5a5;
+    }
+    .btn-sm-action.delete:hover {
+      background: #fee2e2;
+    }
+    .empty-directory-state {
+      padding: 30px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Floating Toast Notification Banner -->
+  <div class="toast-pill" id="adminToast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#34d399" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="adminToastText">Action completed successfully!</span>
+  </div>
+
+  <div class="admin-wrapper">
+
+    <!-- Admin Header -->
+    <header class="admin-header">
+      <div>
+        <h1>QR / NFC Business Setup &amp; Generator</h1>
+        <p>Zero-Recurring-Cost Architecture • Configure business, generate print-ready QR codes &amp; test instantly</p>
+      </div>
+      <div style="display: flex; gap: 10px; align-items: center;">
+        <a href="standee.html" id="btnOpenStandee" target="_blank" class="btn-secondary" style="background: #ffffff; text-decoration: none;">
+          🖨️ Print Standee Artwork
+        </a>
+        <a href="index.html" target="_blank" class="btn-view-app">
+          Open Customer App ↗
+        </a>
+      </div>
+    </header>
+
+    <div class="admin-grid">
+
+      <!-- Column 1: Configuration Form -->
+      <div class="admin-card">
+        <h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+          1. Business Profile
+        </h2>
+
+        <div class="form-group">
+          <label for="bizNameInput">Business Name *</label>
+          <input type="text" id="bizNameInput" value="The Olive &amp; Oak Bistro" placeholder="e.g. The Olive &amp; Oak Bistro" />
+        </div>
+
+        <div class="form-group">
+          <label for="bizCategorySelect">Category *</label>
+          <select id="bizCategorySelect">
+            <option value="restaurant">Restaurant (Dining, Cafes, Bakeries)</option>
+            <option value="hotel">Hotel (Hotels, Resorts, Stays, Homestays)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="bizAddressInput">Address / Area *</label>
+          <input type="text" id="bizAddressInput" value="142 Elmwood Boulevard, Downtown" placeholder="e.g. 142 Elmwood Boulevard, Downtown" />
+        </div>
+
+        <div class="form-group">
+          <label for="bizUrlInput">Google Review URL *</label>
+          <input type="text" id="bizUrlInput" value="https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4" placeholder="https://search.google.com/local/writereview?placeid=..." />
+          <div class="form-hint">Tip: Use the business's direct Google Review Place ID link or short link.</div>
+        </div>
+
+        <div class="form-group">
+          <label for="bizSlugInput">Business Slug / ID *</label>
+          <input type="text" id="bizSlugInput" value="olive-oak-bistro" placeholder="olive-oak-bistro" />
+          <div class="form-hint">Unique identifier used for the QR / NFC landing page.</div>
+        </div>
+
+        <div class="form-group">
+          <label>Brand Accent Color</label>
+          <div class="color-row">
+            <input type="color" id="bizColorInput" value="#2563eb" class="color-input" />
+            <span id="bizColorHex" style="font-family: monospace; font-size: 13px; color: #475569;">#2563eb</span>
+          </div>
+        </div>
+
+        <div class="btn-group" style="margin-top: 20px;">
+          <button class="btn-primary" id="btnUpdatePreview">
+            Update QR &amp; Preview
+          </button>
+          <button class="btn-primary" id="btnSaveBusiness" style="background: #10b981;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            <span>Save &amp; Onboard Business</span>
+          </button>
+          <button class="btn-secondary" id="btnExportJson">
+            Copy Config JSON
+          </button>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <label style="font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; display: block;">Generated JSON Config:</label>
+          <div class="output-json" id="outputJsonArea"></div>
+        </div>
+      </div>
+
+      <!-- Column 2: QR & NFC Assets + Live Preview -->
+      <div class="admin-card">
+        <h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          2. QR Code &amp; NFC Tag URL
+        </h2>
+
+        <div class="qr-preview-box">
+          <div id="qrOutput"></div>
+          <div class="qr-target-url" id="qrTargetUrlText">Loading URL...</div>
+        </div>
+
+        <div class="btn-group" style="justify-content: center; margin-bottom: 20px;">
+          <button class="btn-primary" id="btnDownloadPng">
+            Download PNG (Print Ready)
+          </button>
+          <button class="btn-secondary" id="btnDownloadSvg">
+            Download Vector SVG
+          </button>
+          <button class="btn-secondary" id="btnCopyUrl">
+            Copy NFC URL
+          </button>
+        </div>
+
+        <h2>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+          3. Live Mobile App Preview
+        </h2>
+        <div class="preview-frame-container">
+          <iframe id="mobilePreviewFrame" src="index.html?biz=demo-restaurant"></iframe>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 4. ONBOARDED BUSINESSES DIRECTORY -->
+    <section class="admin-card directory-card">
+      <div class="directory-header">
+        <div>
+          <h2>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Onboarded Businesses Directory (<span id="clientCountBadge" class="badge-count">0</span>)</span>
+          </h2>
+          <p style="font-size: 12.5px; color: #64748b; margin-top: 4px;">Search, verify, and reload any restaurant or hotel you have onboarded. 1-click standee &amp; QR link generation.</p>
+        </div>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn-secondary" id="btnExportDirectory" title="Download backup of all onboarded businesses">📦 Export Backup (JSON)</button>
+          <label class="btn-secondary" style="cursor: pointer; margin-bottom: 0;" title="Restore backup from a JSON file">
+            📥 Import Backup
+            <input type="file" id="importDirectoryInput" accept=".json" style="display: none;" />
+          </label>
+        </div>
+      </div>
+
+      <!-- Search & Category Filters -->
+      <div class="directory-toolbar">
+        <input type="text" id="directorySearchInput" placeholder="🔍 Search onboarded business by name or area..." class="search-input" />
+        <select id="directoryCategoryFilter" class="filter-select">
+          <option value="all">All Categories</option>
+          <option value="restaurant">Restaurants Only</option>
+          <option value="hotel">Hotels Only</option>
+        </select>
+      </div>
+
+      <!-- Directory List Cards -->
+      <div class="directory-list" id="directoryList"></div>
+    </section>
+
+  </div>
+
+  <script>
+/**
+ * Standalone QR Code Generator in pure JavaScript (Zero External Dependencies)
+ * Supports alphanumeric/byte encoding, error correction L/M/Q/H, and direct SVG / Canvas output.
+ */
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define([], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory();
+  } else {
+    root.QRCode = factory();
+  }
+}(typeof self !== 'undefined' ? self : this, function() {
+
+  // Reed-Solomon & QR Math tables
+  const QRMath = {
+    glog: function(n) {
+      if (n < 1) throw new Error("glog(" + n + ")");
+      return QRMath.LOG_TABLE[n];
+    },
+    gexp: function(n) {
+      while (n < 0) n += 255;
+      while (n >= 256) n -= 255;
+      return QRMath.EXP_TABLE[n];
+    },
+    EXP_TABLE: new Array(256),
+    LOG_TABLE: new Array(256)
+  };
+
+  for (let i = 0; i < 8; i++) QRMath.EXP_TABLE[i] = 1 << i;
+  for (let i = 8; i < 256; i++) QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4] ^ QRMath.EXP_TABLE[i - 5] ^ QRMath.EXP_TABLE[i - 6] ^ QRMath.EXP_TABLE[i - 8];
+  for (let i = 0; i < 255; i++) QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]] = i;
+
+  function QRPolynomial(num, shift) {
+    if (num.length == undefined) throw new Error(num.length + "/" + shift);
+    let offset = 0;
+    while (offset < num.length && num[offset] == 0) offset++;
+    this.num = new Array(num.length - offset + shift);
+    for (let i = 0; i < num.length - offset; i++) this.num[i] = num[i + offset];
+  }
+
+  QRPolynomial.prototype = {
+    get: function(index) { return this.num[index]; },
+    getLength: function() { return this.num.length; },
+    multiply: function(e) {
+      const num = new Array(this.getLength() + e.getLength() - 1);
+      for (let i = 0; i < this.getLength(); i++) {
+        for (let j = 0; j < e.getLength(); j++) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i)) + QRMath.glog(e.get(j)));
+        }
+      }
+      return new QRPolynomial(num, 0);
+    },
+    mod: function(e) {
+      if (this.getLength() - e.getLength() < 0) return this;
+      const ratio = QRMath.glog(this.get(0)) - QRMath.glog(e.get(0));
+      const num = new Array(this.getLength());
+      for (let i = 0; i < this.getLength(); i++) num[i] = this.get(i);
+      for (let i = 0; i < e.getLength(); i++) num[i] ^= QRMath.gexp(QRMath.glog(e.get(i)) + ratio);
+      return new QRPolynomial(num, 0).mod(e);
+    }
+  };
+
+  function QRRSBlock(totalCount, dataCount) {
+    this.totalCount = totalCount;
+    this.dataCount = dataCount;
+  }
+
+  QRRSBlock.RS_BLOCK_TABLE = [
+    // 1-40 Versions with L, M, Q, H
+    [1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9],
+    [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16],
+    [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13],
+    [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9],
+    [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12],
+    [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15],
+    [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14],
+    [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15],
+    [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13],
+    [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16]
+  ];
+
+  QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+    const rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+    if (rsBlock == undefined) throw new Error("bad rs block @ typeNumber:" + typeNumber);
+    const length = rsBlock.length / 3;
+    const list = [];
+    for (let i = 0; i < length; i++) {
+      const count = rsBlock[i * 3 + 0];
+      const totalCount = rsBlock[i * 3 + 1];
+      const dataCount = rsBlock[i * 3 + 2];
+      for (let j = 0; j < count; j++) list.push(new QRRSBlock(totalCount, dataCount));
+    }
+    return list;
+  };
+
+  QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+    switch (errorCorrectLevel) {
+      case 1: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+      case 0: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+      case 3: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+      case 2: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+      default: return undefined;
+    }
+  };
+
+  function QRBitBuffer() {
+    this.buffer = [];
+    this.length = 0;
+  }
+
+  QRBitBuffer.prototype = {
+    get: function(index) {
+      const bufIndex = Math.floor(index / 8);
+      return ((this.buffer[bufIndex] >>> (7 - index % 8)) & 1) == 1;
+    },
+    put: function(num, length) {
+      for (let i = 0; i < length; i++) this.putBit(((num >>> (length - i - 1)) & 1) == 1);
+    },
+    putBit: function(bit) {
+      const bufIndex = Math.floor(this.length / 8);
+      if (this.buffer.length <= bufIndex) this.buffer.push(0);
+      if (bit) this.buffer[bufIndex] |= (0x80 >>> (this.length % 8));
+      this.length++;
+    }
+  };
+
+  function QRCodeModel(typeNumber, errorCorrectLevel) {
+    this.typeNumber = typeNumber;
+    this.errorCorrectLevel = errorCorrectLevel;
+    this.modules = null;
+    this.moduleCount = 0;
+    this.dataCache = null;
+    this.dataList = [];
+  }
+
+  QRCodeModel.prototype = {
+    addData: function(data) {
+      this.dataList.push(data);
+      this.dataCache = null;
+    },
+    isDark: function(row, col) {
+      if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+        throw new Error(row + "," + col);
+      }
+      return this.modules[row][col];
+    },
+    getModuleCount: function() { return this.moduleCount; },
+    make: function() {
+      if (this.typeNumber < 1) {
+        let typeNumber = 1;
+        for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+          const rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+          const buffer = new QRBitBuffer();
+          let totalDataCount = 0;
+          for (let i = 0; i < rsBlocks.length; i++) totalDataCount += rsBlocks[i].dataCount;
+          for (let i = 0; i < this.dataList.length; i++) {
+            const data = this.dataList[i];
+            buffer.put(4, 4); // 8-bit byte mode
+            buffer.put(data.length, typeNumber < 10 ? 8 : 16);
+            for (let j = 0; j < data.length; j++) buffer.put(data.charCodeAt(j), 8);
+          }
+          if (buffer.length <= totalDataCount * 8) break;
+        }
+        this.typeNumber = typeNumber;
+      }
+      this.makeImpl(false, this.getBestMaskPattern());
+    },
+    makeImpl: function(test, maskPattern) {
+      this.moduleCount = this.typeNumber * 4 + 17;
+      this.modules = new Array(this.moduleCount);
+      for (let row = 0; row < this.moduleCount; row++) {
+        this.modules[row] = new Array(this.moduleCount);
+        for (let col = 0; col < this.moduleCount; col++) this.modules[row][col] = null;
+      }
+      this.setupPositionProbePattern(0, 0);
+      this.setupPositionProbePattern(this.moduleCount - 7, 0);
+      this.setupPositionProbePattern(0, this.moduleCount - 7);
+      this.setupTimingPattern();
+      this.setupPositionAdjustPattern();
+      if (this.typeNumber >= 7) this.setupTypeNumber(test);
+      if (this.dataCache == null) this.dataCache = QRCodeModel.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+      this.mapData(this.dataCache, maskPattern);
+    },
+    setupPositionProbePattern: function(row, col) {
+      for (let r = -1; r <= 7; r++) {
+        if (row + r <= -1 || this.moduleCount <= row + r) continue;
+        for (let c = -1; c <= 7; c++) {
+          if (col + c <= -1 || this.moduleCount <= col + c) continue;
+          if ((0 <= r && r <= 6 && (c == 0 || c == 6)) || (0 <= c && c <= 6 && (r == 0 || r == 6)) || (2 <= r && r <= 4 && 2 <= c && c <= 4)) {
+            this.modules[row + r][col + c] = true;
+          } else {
+            this.modules[row + r][col + c] = false;
+          }
+        }
+      }
+    },
+    getBestMaskPattern: function() {
+      let minLostPoint = 0;
+      let pattern = 0;
+      for (let i = 0; i < 8; i++) {
+        this.makeImpl(true, i);
+        const lostPoint = QRUtil.getLostPoint(this);
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+        }
+      }
+      return pattern;
+    },
+    setupTimingPattern: function() {
+      for (let r = 8; r < this.moduleCount - 8; r++) {
+        if (this.modules[r][6] != null) continue;
+        this.modules[r][6] = (r % 2 == 0);
+      }
+      for (let c = 8; c < this.moduleCount - 8; c++) {
+        if (this.modules[6][c] != null) continue;
+        this.modules[6][c] = (c % 2 == 0);
+      }
+    },
+    setupPositionAdjustPattern: function() {
+      const pos = QRUtil.getPatternPosition(this.typeNumber);
+      for (let i = 0; i < pos.length; i++) {
+        for (let j = 0; j < pos.length; j++) {
+          const row = pos[i];
+          const col = pos[j];
+          if (this.modules[row][col] != null) continue;
+          for (let r = -2; r <= 2; r++) {
+            for (let c = -2; c <= 2; c++) {
+              if (r == -2 || r == 2 || c == -2 || c == 2 || (r == 0 && c == 0)) {
+                this.modules[row + r][col + c] = true;
+              } else {
+                this.modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    },
+    setupTypeNumber: function(test) {
+      const bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+      for (let i = 0; i < 18; i++) {
+        const mod = (!test && ((bits >> i) & 1) == 1);
+        this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+        this.modules[i % 3 + this.moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    },
+    mapData: function(data, maskPattern) {
+      let inc = -1;
+      let row = this.moduleCount - 1;
+      let bitIndex = 7;
+      let byteIndex = 0;
+      for (let col = this.moduleCount - 1; col > 0; col -= 2) {
+        if (col == 6) col--;
+        while (true) {
+          for (let c = 0; c < 2; c++) {
+            if (this.modules[row][col - c] == null) {
+              let dark = false;
+              if (byteIndex < data.length) dark = (((data[byteIndex] >>> bitIndex) & 1) == 1);
+              const mask = QRUtil.getMask(maskPattern, row, col - c);
+              if (mask) dark = !dark;
+              this.modules[row][col - c] = dark;
+              bitIndex--;
+              if (bitIndex == -1) {
+                byteIndex++;
+                bitIndex = 7;
+              }
+            }
+          }
+          row += inc;
+          if (row < 0 || this.moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    }
+  };
+
+  QRCodeModel.createData = function(typeNumber, errorCorrectLevel, dataList) {
+    const rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+    const buffer = new QRBitBuffer();
+    for (let i = 0; i < dataList.length; i++) {
+      const data = dataList[i];
+      buffer.put(4, 4); // byte mode
+      buffer.put(data.length, typeNumber < 10 ? 8 : 16);
+      for (let j = 0; j < data.length; j++) buffer.put(data.charCodeAt(j), 8);
+    }
+    let totalDataCount = 0;
+    for (let i = 0; i < rsBlocks.length; i++) totalDataCount += rsBlocks[i].dataCount;
+    if (buffer.length + 4 <= totalDataCount * 8) buffer.put(0, 4);
+    while (buffer.length % 8 != 0) buffer.putBit(false);
+    while (true) {
+      if (buffer.length >= totalDataCount * 8) break;
+      buffer.put(0xEC, 8);
+      if (buffer.length >= totalDataCount * 8) break;
+      buffer.put(0x11, 8);
+    }
+    return QRCodeModel.createBytes(buffer, rsBlocks);
+  };
+
+  QRCodeModel.createBytes = function(buffer, rsBlocks) {
+    let offset = 0;
+    let maxDcCount = 0;
+    let maxEcCount = 0;
+    const dcdata = new Array(rsBlocks.length);
+    const ecdata = new Array(rsBlocks.length);
+    for (let r = 0; r < rsBlocks.length; r++) {
+      const dcCount = rsBlocks[r].dataCount;
+      const ecCount = rsBlocks[r].totalCount - dcCount;
+      maxDcCount = Math.max(maxDcCount, dcCount);
+      maxEcCount = Math.max(maxEcCount, ecCount);
+      dcdata[r] = new Array(dcCount);
+      for (let i = 0; i < dcdata[r].length; i++) dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+      offset += dcCount;
+      const rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+      const rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+      const modPoly = rawPoly.mod(rsPoly);
+      ecdata[r] = new Array(rsPoly.getLength() - 1);
+      for (let i = 0; i < ecdata[r].length; i++) {
+        const modIndex = i + modPoly.getLength() - ecdata[r].length;
+        ecdata[r][i] = (modIndex >= 0) ? modPoly.get(modIndex) : 0;
+      }
+    }
+    let totalCodeCount = 0;
+    for (let i = 0; i < rsBlocks.length; i++) totalCodeCount += rsBlocks[i].totalCount;
+    const data = new Array(totalCodeCount);
+    let index = 0;
+    for (let i = 0; i < maxDcCount; i++) {
+      for (let r = 0; r < rsBlocks.length; r++) {
+        if (i < dcdata[r].length) data[index++] = dcdata[r][i];
+      }
+    }
+    for (let i = 0; i < maxEcCount; i++) {
+      for (let r = 0; r < rsBlocks.length; r++) {
+        if (i < ecdata[r].length) data[index++] = ecdata[r][i];
+      }
+    }
+    return data;
+  };
+
+  const QRUtil = {
+    PATTERN_POSITION_TABLE: [
+      [], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54]
+    ],
+    getPatternPosition: function(typeNumber) { return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1] || []; },
+    getMask: function(maskPattern, i, j) {
+      switch (maskPattern) {
+        case 0: return (i + j) % 2 == 0;
+        case 1: return i % 2 == 0;
+        case 2: return j % 3 == 0;
+        case 3: return (i + j) % 3 == 0;
+        case 4: return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 == 0;
+        case 5: return (i * j) % 2 + (i * j) % 3 == 0;
+        case 6: return ((i * j) % 2 + (i * j) % 3) % 2 == 0;
+        case 7: return ((i * j) % 3 + (i + j) % 2) % 2 == 0;
+        default: throw new Error("bad maskPattern:" + maskPattern);
+      }
+    },
+    getErrorCorrectPolynomial: function(errorCorrectLength) {
+      let a = new QRPolynomial([1], 0);
+      for (let i = 0; i < errorCorrectLength; i++) a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0));
+      return a;
+    },
+    getBCHTypeNumber: function(data) {
+      let d = data << 12;
+      while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(7973) >= 0) {
+        d ^= (7973 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(7973)));
+      }
+      return (data << 12) | d;
+    },
+    getBCHDigit: function(data) {
+      let digit = 0;
+      while (data != 0) { digit++; data >>>= 1; }
+      return digit;
+    },
+    getLostPoint: function(qrCode) {
+      const moduleCount = qrCode.getModuleCount();
+      let lostPoint = 0;
+      for (let row = 0; row < moduleCount; row++) {
+        for (let col = 0; col < moduleCount; col++) {
+          let sameCount = 0;
+          const dark = qrCode.isDark(row, col);
+          for (let r = -1; r <= 1; r++) {
+            if (row + r < 0 || moduleCount <= row + r) continue;
+            for (let c = -1; c <= 1; c++) {
+              if (col + c < 0 || moduleCount <= col + c) continue;
+              if (r == 0 && c == 0) continue;
+              if (dark == qrCode.isDark(row + r, col + c)) sameCount++;
+            }
+          }
+          if (sameCount > 5) lostPoint += (3 + sameCount - 5);
+        }
+      }
+      return lostPoint;
+    }
+  };
+
+  /**
+   * Main QRCode class for DOM / Canvas / SVG rendering
+   */
+  function QRCode(target, options) {
+    if (typeof options === "string") {
+      options = { text: options };
+    }
+    this.options = Object.assign({
+      width: 256,
+      height: 256,
+      typeNumber: 4,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: 0 // M
+    }, options);
+
+    this.target = typeof target === "string" ? document.getElementById(target) : target;
+    if (this.options.text) {
+      this.makeCode(this.options.text);
+    }
+  }
+
+  QRCode.prototype.makeCode = function(text) {
+    const qr = new QRCodeModel(0, this.options.correctLevel);
+    qr.addData(text);
+    qr.make();
+    this.render(qr);
+  };
+
+  QRCode.prototype.render = function(qr) {
+    if (!this.target) return;
+    this.target.innerHTML = '';
+    const moduleCount = qr.getModuleCount();
+    const size = this.options.width;
+    const cellSize = size / moduleCount;
+
+    // Create Canvas
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = this.options.colorLight;
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = this.options.colorDark;
+
+    for (let row = 0; row < moduleCount; row++) {
+      for (let col = 0; col < moduleCount; col++) {
+        if (qr.isDark(row, col)) {
+          ctx.fillRect(Math.round(col * cellSize), Math.round(row * cellSize), Math.ceil(cellSize), Math.ceil(cellSize));
+        }
+      }
+    }
+    this.target.appendChild(canvas);
+    this.canvas = canvas;
+    this.qrModel = qr;
+  };
+
+  QRCode.prototype.getSvgString = function() {
+    if (!this.qrModel) return '';
+    const qr = this.qrModel;
+    const moduleCount = qr.getModuleCount();
+    const size = this.options.width;
+    const cellSize = (size / moduleCount).toFixed(3);
+
+    let rects = '';
+    for (let row = 0; row < moduleCount; row++) {
+      for (let col = 0; col < moduleCount; col++) {
+        if (qr.isDark(row, col)) {
+          rects += `<rect x="${(col * cellSize)}" y="${(row * cellSize)}" width="${cellSize}" height="${cellSize}" fill="${this.options.colorDark}" />`;
+        }
+      }
+    }
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
+      <rect width="100%" height="100%" fill="${this.options.colorLight}"/>
+      ${rects}
+    </svg>`;
+  };
+
+  return QRCode;
+}));
+
+</script>
+  <script>
+    (function() {
+      const bizNameInput = document.getElementById('bizNameInput');
+      const bizCategorySelect = document.getElementById('bizCategorySelect');
+      const bizAddressInput = document.getElementById('bizAddressInput');
+      const bizUrlInput = document.getElementById('bizUrlInput');
+      const bizSlugInput = document.getElementById('bizSlugInput');
+      const bizColorInput = document.getElementById('bizColorInput');
+      const bizColorHex = document.getElementById('bizColorHex');
+      const btnUpdatePreview = document.getElementById('btnUpdatePreview');
+      const btnExportJson = document.getElementById('btnExportJson');
+      const outputJsonArea = document.getElementById('outputJsonArea');
+      const qrOutput = document.getElementById('qrOutput');
+      const qrTargetUrlText = document.getElementById('qrTargetUrlText');
+      const btnDownloadPng = document.getElementById('btnDownloadPng');
+      const btnDownloadSvg = document.getElementById('btnDownloadSvg');
+      const btnCopyUrl = document.getElementById('btnCopyUrl');
+      const mobilePreviewFrame = document.getElementById('mobilePreviewFrame');
+      const btnOpenStandee = document.getElementById('btnOpenStandee');
+
+      let currentQr = null;
+
+      // Update color text
+      bizColorInput.addEventListener('input', () => {
+        bizColorHex.textContent = bizColorInput.value;
+      });
+
+      // Auto slugify name if not edited
+      bizNameInput.addEventListener('input', () => {
+        const slug = bizNameInput.value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        bizSlugInput.value = slug;
+      });
+
+      function getGeneratedConfig() {
+        return {
+          id: bizSlugInput.value.trim() || 'business',
+          name: bizNameInput.value.trim() || 'My Business',
+          category: bizCategorySelect.value,
+          address: bizAddressInput.value.trim() || 'Local Area',
+          googleReviewUrl: bizUrlInput.value.trim() || '#',
+          brandColor: bizColorInput.value,
+          logoText: (bizNameInput.value.trim().substring(0, 2) || 'BIZ').toUpperCase(),
+          invitationHeading: bizCategorySelect.value === 'hotel' ? 'Share your stay experience' : 'Share your dining experience',
+          invitationSubtext: 'Your honest feedback helps fellow visitors and supports our dedicated team.'
+        };
+      }
+
+      function updateAll() {
+        const config = getGeneratedConfig();
+
+        // 1. Update JSON Area
+        const configJson = JSON.stringify(config, null, 2);
+        outputJsonArea.textContent = configJson;
+
+        // 2. Build Target URL for QR and NFC
+        const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + '/index.html';
+        const params = new URLSearchParams({
+          biz: config.id,
+          name: config.name,
+          category: config.category,
+          address: config.address,
+          color: config.brandColor,
+          url: config.googleReviewUrl
+        });
+        const fullUrl = `${baseUrl}?${params.toString()}`;
+        qrTargetUrlText.textContent = fullUrl;
+
+        // 3. Update QR Code
+        qrOutput.innerHTML = '';
+        currentQr = new QRCode(qrOutput, {
+          text: fullUrl,
+          width: 200,
+          height: 200,
+          colorDark: "#0f172a",
+          colorLight: "#ffffff"
+        });
+
+        // 4. Update Live Iframe Preview & Standee Link
+        mobilePreviewFrame.src = fullUrl;
+        if (btnOpenStandee) {
+          const standeeBase = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + '/standee.html';
+          btnOpenStandee.href = `${standeeBase}?${params.toString()}`;
+        }
+      }
+
+      btnUpdatePreview.addEventListener('click', updateAll);
+
+      btnExportJson.addEventListener('click', () => {
+        const json = outputJsonArea.textContent;
+        navigator.clipboard.writeText(json).then(() => {
+          alert('Config JSON copied to clipboard!');
+        });
+      });
+
+      btnCopyUrl.addEventListener('click', () => {
+        const url = qrTargetUrlText.textContent;
+        navigator.clipboard.writeText(url).then(() => {
+          alert('NFC / QR Destination URL copied to clipboard!');
+        });
+      });
+
+      btnDownloadPng.addEventListener('click', () => {
+        const canvas = qrOutput.querySelector('canvas');
+        if (!canvas) return;
+
+        // Create high-res export canvas (1024x1024)
+        const exportCanvas = document.createElement('canvas');
+        exportCanvas.width = 1024;
+        exportCanvas.height = 1024;
+        const ctx = exportCanvas.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, 1024, 1024);
+
+        // Draw QR
+        ctx.drawImage(canvas, 64, 64, 896, 896);
+
+        const a = document.createElement('a');
+        a.download = `QR_${bizSlugInput.value || 'code'}.png`;
+        a.href = exportCanvas.toDataURL('image/png');
+        a.click();
+      });
+
+      btnDownloadSvg.addEventListener('click', () => {
+        if (!currentQr) return;
+        const svgStr = currentQr.getSvgString();
+        const blob = new Blob([svgStr], { type: 'image/svg+xml;charset=utf-8' });
+        const a = document.createElement('a');
+        a.download = `QR_${bizSlugInput.value || 'code'}.svg`;
+        a.href = URL.createObjectURL(blob);
+        a.click();
+      });
+
+      // =========================================================================
+      // ONBOARDED BUSINESSES DIRECTORY & CLIENT NOTIFICATION ENGINE
+      // =========================================================================
+      const DIRECTORY_STORAGE_KEY = 'onboarded_businesses_directory';
+      const btnSaveBusiness = document.getElementById('btnSaveBusiness');
+      const directoryList = document.getElementById('directoryList');
+      const clientCountBadge = document.getElementById('clientCountBadge');
+      const directorySearchInput = document.getElementById('directorySearchInput');
+      const directoryCategoryFilter = document.getElementById('directoryCategoryFilter');
+      const btnExportDirectory = document.getElementById('btnExportDirectory');
+      const importDirectoryInput = document.getElementById('importDirectoryInput');
+
+      let toastTimer = null;
+      function showToast(msg) {
+        const toast = document.getElementById('adminToast');
+        const toastText = document.getElementById('adminToastText');
+        toastText.textContent = msg;
+        toast.classList.add('visible');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('visible'), 3200);
+      }
+
+      function getDirectory() {
+        try {
+          const raw = localStorage.getItem(DIRECTORY_STORAGE_KEY);
+          if (raw) return JSON.parse(raw);
+        } catch (e) {}
+        // Default starter business if none exists
+        return [
+          {
+            id: 'olive-oak-bistro',
+            name: 'The Olive & Oak Bistro',
+            category: 'restaurant',
+            address: '142 Elmwood Boulevard, Downtown',
+            googleReviewUrl: 'https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4',
+            brandColor: '#1a73e8',
+            addedAt: 'Nov 18, 2026'
+          }
+        ];
+      }
+
+      function saveDirectory(list) {
+        try {
+          localStorage.setItem(DIRECTORY_STORAGE_KEY, JSON.stringify(list));
+        } catch (e) {}
+      }
+
+      function renderDirectory() {
+        const list = getDirectory();
+        clientCountBadge.textContent = list.length;
+
+        const query = (directorySearchInput.value || '').toLowerCase().trim();
+        const catFilter = directoryCategoryFilter.value;
+
+        const filtered = list.filter(item => {
+          const matchesQuery = !query || 
+            item.name.toLowerCase().includes(query) || 
+            item.address.toLowerCase().includes(query) || 
+            item.id.toLowerCase().includes(query);
+          const matchesCat = catFilter === 'all' || item.category === catFilter;
+          return matchesQuery && matchesCat;
+        });
+
+        if (filtered.length === 0) {
+          directoryList.innerHTML = `
+            <div class="empty-directory-state">
+              <span>🔍 No businesses found matching your filter. Click "Save &amp; Onboard Business" above to add one!</span>
+            </div>
+          `;
+          return;
+        }
+
+        const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+
+        directoryList.innerHTML = filtered.map(item => {
+          const initials = (item.name || 'BZ').substring(0, 2).toUpperCase();
+          const params = new URLSearchParams({
+            biz: item.id,
+            name: item.name,
+            category: item.category,
+            address: item.address,
+            color: item.brandColor,
+            url: item.googleReviewUrl
+          }).toString();
+
+          const customerUrl = `${baseUrl}/index.html?${params}`;
+          const standeeUrl = `${baseUrl}/standee.html?${params}`;
+
+          return `
+            <div class="client-item-card" data-biz-id="${item.id}">
+              <div class="client-info-col">
+                <div class="client-avatar" style="background: ${item.brandColor || '#2563eb'};">
+                  ${initials}
+                </div>
+                <div class="client-meta">
+                  <div class="client-name-title">
+                    <span>${item.name}</span>
+                    <span class="category-badge-sm cat-${item.category}">${item.category}</span>
+                  </div>
+                  <div class="client-address-sub">
+                    📍 ${item.address} &bull; <span style="font-family: monospace;">#${item.id}</span> &bull; 🕒 Added: ${item.addedAt || 'Recently'}
+                  </div>
+                </div>
+              </div>
+              <div class="client-actions-group">
+                <button class="btn-sm-action primary btn-load-client" data-id="${item.id}">
+                  ✏️ Load &amp; Edit
+                </button>
+                <a href="${standeeUrl}" target="_blank" class="btn-sm-action" style="background:#ffffff;">
+                  🖨️ Standee
+                </a>
+                <a href="${customerUrl}" target="_blank" class="btn-sm-action">
+                  📱 Open App ↗
+                </a>
+                <button class="btn-sm-action btn-copy-client-url" data-url="${customerUrl}">
+                  🔗 Copy Link
+                </button>
+                <button class="btn-sm-action delete btn-delete-client" data-id="${item.id}">
+                  🗑️
+                </button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      function loadBusinessIntoForm(id) {
+        const list = getDirectory();
+        const found = list.find(item => item.id === id);
+        if (!found) return;
+
+        bizNameInput.value = found.name;
+        bizCategorySelect.value = found.category;
+        bizAddressInput.value = found.address;
+        bizUrlInput.value = found.googleReviewUrl;
+        bizSlugInput.value = found.id;
+        bizColorInput.value = found.brandColor;
+        bizColorHex.textContent = found.brandColor;
+
+        updateAll();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        showToast(`✏️ Loaded "${found.name}" into generator!`);
+      }
+
+      // Save / Onboard Button Click
+      btnSaveBusiness.addEventListener('click', () => {
+        const config = getGeneratedConfig();
+        if (!config.name || !config.id) {
+          alert('Please provide a Business Name and Slug.');
+          return;
+        }
+
+        const list = getDirectory();
+        const idx = list.findIndex(item => item.id === config.id);
+
+        const record = {
+          ...config,
+          addedAt: new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
+        };
+
+        if (idx >= 0) {
+          list[idx] = record;
+          showToast(`✅ Updated "${config.name}" in directory!`);
+        } else {
+          list.unshift(record);
+          showToast(`🎉 Successfully onboarded "${config.name}"!`);
+        }
+
+        saveDirectory(list);
+        renderDirectory();
+      });
+
+      // Delegate actions inside Directory list
+      directoryList.addEventListener('click', (e) => {
+        const loadBtn = e.target.closest('.btn-load-client');
+        if (loadBtn) {
+          const id = loadBtn.getAttribute('data-id');
+          loadBusinessIntoForm(id);
+          return;
+        }
+
+        const copyBtn = e.target.closest('.btn-copy-client-url');
+        if (copyBtn) {
+          const url = copyBtn.getAttribute('data-url');
+          navigator.clipboard.writeText(url).then(() => {
+            showToast('📋 Customer QR/NFC link copied to clipboard!');
+          });
+          return;
+        }
+
+        const delBtn = e.target.closest('.btn-delete-client');
+        if (delBtn) {
+          const id = delBtn.getAttribute('data-id');
+          if (confirm('Are you sure you want to remove this business from your directory?')) {
+            const list = getDirectory().filter(item => item.id !== id);
+            saveDirectory(list);
+            renderDirectory();
+            showToast('🗑️ Business removed from directory.');
+          }
+        }
+      });
+
+      // Filter events
+      directorySearchInput.addEventListener('input', renderDirectory);
+      directoryCategoryFilter.addEventListener('change', renderDirectory);
+
+      // Export Directory Backup
+      btnExportDirectory.addEventListener('click', () => {
+        const list = getDirectory();
+        const blob = new Blob([JSON.stringify(list, null, 2)], { type: 'application/json' });
+        const a = document.createElement('a');
+        a.download = `Onboarded_Businesses_Backup_${new Date().toISOString().slice(0,10)}.json`;
+        a.href = URL.createObjectURL(blob);
+        a.click();
+        showToast('📦 Directory backup downloaded!');
+      });
+
+      // Import Directory Backup
+      importDirectoryInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          try {
+            const imported = JSON.parse(event.target.result);
+            if (Array.isArray(imported)) {
+              saveDirectory(imported);
+              renderDirectory();
+              showToast(`📥 Successfully imported ${imported.length} businesses!`);
+            } else {
+              alert('Invalid backup JSON file.');
+            }
+          } catch (err) {
+            alert('Failed to parse backup file.');
+          }
+        };
+        reader.readAsText(file);
+      });
+
+      // Initial run
+      updateAll();
+      renderDirectory();
+    })();
+  </script>
+</body>
+</html>

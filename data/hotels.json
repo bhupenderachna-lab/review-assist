@@ -1,0 +1,122 @@
+[
+  {
+    "id": "hotel_001",
+    "theme": "Overall Stay & Hospitality",
+    "tone": "Warm & Appreciative",
+    "text": "Had a wonderful and comfortable stay here. The front desk team made check-in seamless and welcomed us with great warmth. The room was spotlessly clean, well-appointed, and the bed provided a restful night's sleep. Housekeeping was prompt and attentive whenever requested. Truly appreciated the attention to detail and professional hospitality throughout our visit."
+  },
+  {
+    "id": "hotel_002",
+    "theme": "Business Trip",
+    "tone": "Professional & Efficient",
+    "text": "Stayed here for a work trip and found the entire experience smooth and efficient. Check-in and check-out were swift, the room was quiet with a comfortable work area, and the Wi-Fi connection was reliable throughout my stay. The staff were courteous and helpful with all inquiries. An excellent choice for business travelers seeking convenience and reliability."
+  },
+  {
+    "id": "hotel_003",
+    "theme": "Family Leisure Stay",
+    "tone": "Family-Oriented",
+    "text": "A pleasant and relaxing stay for our family trip. The property was clean, safe, and well-maintained. The staff were very accommodating with our requests and made sure everyone in the family felt welcome and comfortable. The morning dining options were fresh and varied. Would gladly recommend this hotel to anyone traveling with family."
+  },
+  {
+    "id": "hotel_004",
+    "theme": "Weekend Getaway",
+    "tone": "Relaxed & Peaceful",
+    "text": "Booked a weekend stay to unwind and had a thoroughly refreshing experience. The ambience was peaceful and calm, allowing for total relaxation. The room was spacious, fresh, and meticulously maintained. Every staff member we encountered greeted us with a genuine smile. A great place to recharge."
+  },
+  {
+    "id": "hotel_005",
+    "theme": "Cleanliness & Comfort",
+    "tone": "Detailed & Reassuring",
+    "text": "Cleanliness and comfort are always top priorities for me when traveling, and this hotel delivered on both counts. The linens were crisp, the bathroom was impeccably clean, and the overall upkeep was commendable. Service across all touchpoints was polite and responsive. Thoroughly satisfied with my stay."
+  },
+  {
+    "id": "hotel_006",
+    "theme": "Check-in & Service Flow",
+    "tone": "Courteous & Direct",
+    "text": "From arrival to departure, the service was exemplary. Check-in was processed promptly without unnecessary waiting, and the reception team was polite and informative. The room was well-prepared and peaceful. Check-out was just as effortless. Appreciate the smooth coordination and high standard of service."
+  },
+  {
+    "id": "hotel_007",
+    "theme": "Location & Accessibility",
+    "tone": "Convenient & Practical",
+    "text": "The hotel's convenient location made getting around very easy and hassle-free. Aside from accessibility, the property itself is peaceful and well-managed. The rooms are cozy, climate control was comfortable, and staff were always available to assist with directions and requests. Would definitely stay here again."
+  },
+  {
+    "id": "hotel_008",
+    "theme": "Dining & In-House Hospitality",
+    "tone": "Delighted & Satisfied",
+    "text": "Really enjoyed my stay here. In addition to a clean, comfortable, and quiet room, the on-site dining experience was very good with fresh, flavorful preparations. The team members serving us were attentive, cheerful, and quick to help. It made the entire trip feel effortless and pleasant."
+  },
+  {
+    "id": "hotel_009",
+    "theme": "First-Time Guest",
+    "tone": "Impressed & Positive",
+    "text": "This was my first stay at this property and I was very favorably impressed. The check-in was smooth, the common areas and room were clean and tastefully presented, and the staff maintained a polite, helpful attitude at all times. A dependable and comfortable experience from start to finish."
+  },
+  {
+    "id": "hotel_010",
+    "theme": "Comfortable & Restful Night",
+    "tone": "Quiet & Restful",
+    "text": "Had a very peaceful and uninterrupted night's sleep here. The bed was extremely comfortable, noise insulation was great, and the temperature control was easy to adjust. The housekeeping team did an excellent job keeping everything tidy. High standards all around."
+  },
+  {
+    "id": "hotel_011",
+    "theme": "Solo Traveler",
+    "tone": "Comfortable & Safe",
+    "text": "Traveled solo and felt safe, welcomed, and well taken care of throughout my stay. The staff were professional, friendly, and always ready to assist. The room was spotless, comfortable, and had everything needed for a hassle-free visit. Will certainly return on my next trip."
+  },
+  {
+    "id": "hotel_012",
+    "theme": "Staff Attentiveness",
+    "tone": "Heartfelt & Kind",
+    "text": "What made this stay memorable was the outstanding attentiveness of the team. Every request was addressed quickly and with a smile. The room was kept clean and fresh throughout my stay. Thank you to everyone for making me feel right at home."
+  },
+  {
+    "id": "hotel_013",
+    "theme": "Transit / Short Stay",
+    "tone": "Swift & Convenient",
+    "text": "Stayed for a short overnight stopover and it was completely hassle-free. Quick check-in, comfortable and clean bed, quiet room, and an easy morning check-out. Exactly what one needs for a smooth, refreshing stop. Recommended!"
+  },
+  {
+    "id": "hotel_014",
+    "theme": "Spacious & Well-Maintained",
+    "tone": "Positive & Observant",
+    "text": "The property is well-maintained and aesthetically pleasing. The room felt roomy, clean, and well-ventilated. Common corridors and lobby areas were kept spotless. Staff conducted themselves with great professionalism. A very pleasant stay overall."
+  },
+  {
+    "id": "hotel_015",
+    "theme": "Couples / Leisure Trip",
+    "tone": "Warm & Relaxed",
+    "text": "A lovely stay with a serene atmosphere. We appreciated the calm environment, the polite demeanor of the staff, and the comfortable room setup. Everything was smoothly arranged from check-in to check-out. Would happily stay here again on future visits."
+  },
+  {
+    "id": "hotel_016",
+    "theme": "Professional Standards",
+    "tone": "Crisp & Professional",
+    "text": "Consistently impressed by the operational standards here. Quick desk response, clean and quiet room environment, and a courteous team across all departments. Everything functioned as expected without any delays or complications."
+  },
+  {
+    "id": "hotel_017",
+    "theme": "Welcoming Vibe",
+    "tone": "Welcoming & Grateful",
+    "text": "From the welcoming smiles at reception to the attentive housekeeping staff, every interaction was pleasant. The room was fresh, bright, and very comfortable. Thank you for a wonderful and stress-free stay!"
+  },
+  {
+    "id": "hotel_018",
+    "theme": "Refreshing Atmosphere",
+    "tone": "Calm & Reassuring",
+    "text": "A calm, comfortable place to stay. Clean facilities, prompt service, and very hospitable staff who made sure everything was in order during my time here. I had a great stay and will gladly return."
+  },
+  {
+    "id": "hotel_019",
+    "theme": "Value & Experience",
+    "tone": "Balanced & Pleased",
+    "text": "Very pleased with the entire experience. Comfortable bed, spotless bathroom, good in-room amenities, and polite staff who went out of their way to assist. It's great to find a hotel that takes pride in its upkeep and service."
+  },
+  {
+    "id": "hotel_020",
+    "theme": "Smooth Experience",
+    "tone": "Short & Direct",
+    "text": "Smooth check-in, clean and peaceful room, and helpful staff throughout. Everything was handled professionally. Highly recommended for a comfortable stay."
+  }
+]

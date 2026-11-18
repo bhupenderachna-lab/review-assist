@@ -1,0 +1,122 @@
+[
+  {
+    "id": "rest_001",
+    "theme": "Atmosphere & Dining Experience",
+    "tone": "Warm & Appreciative",
+    "text": "Had a wonderful dining experience here today. From the moment we stepped in, the ambiance felt inviting and relaxed. The seating was comfortable, the music was at just the right volume, and the overall vibe made it easy to unwind. Every dish we ordered was fresh, beautifully presented, and full of flavor. The staff were attentive without being intrusive. Will definitely be coming back again soon!"
+  },
+  {
+    "id": "rest_002",
+    "theme": "Service & Hospitality",
+    "tone": "Friendly & Polite",
+    "text": "What truly stood out for us during our visit was the hospitality. The team greeted us warmly, guided us through the menu recommendations patiently, and checked in on our table with genuine care. The food arrived hot and fresh in good time. It is rare to find service that feels this attentive and sincere. Thank you for making our meal so enjoyable."
+  },
+  {
+    "id": "rest_003",
+    "theme": "Casual Visit",
+    "tone": "Casual & Modern",
+    "text": "Great spot to catch up with friends or grab a relaxed bite. The aesthetic is clean and modern, and the environment has great positive energy. We tried a couple of items and everything tasted fresh and well-balanced. Service was quick and polite. Definitely adding this place to my regular rotation."
+  },
+  {
+    "id": "rest_004",
+    "theme": "Family Dinner",
+    "tone": "Family-Oriented",
+    "text": "Visited with my family for dinner and we were all very pleased. The seating was spacious and accommodating for a group. The menu has good variety to suit different tastes, and all our orders arrived fresh and delicious. Staff were patient and very courteous with everyone at the table. A great family-friendly dining destination."
+  },
+  {
+    "id": "rest_005",
+    "theme": "Quick & Efficient Lunch",
+    "tone": "Concise & Positive",
+    "text": "Stopped by for lunch during a busy day and was thoroughly impressed by how smoothly everything was handled. Quick seating, efficient order taking, and prompt service. The food was fresh, flavorful, and portion sizes were satisfying. Clean tables and pleasant decor. Highly recommended for a quality meal without long waits."
+  },
+  {
+    "id": "rest_006",
+    "theme": "Special Celebration",
+    "tone": "Celebratory & Warm",
+    "text": "Celebrated a special occasion here and it turned out to be the perfect choice. The ambiance felt elevated yet cozy, and the staff made sure our table was well looked after throughout the evening. The meal was flavorful, well-crafted, and served with care. It made our celebration feel truly memorable."
+  },
+  {
+    "id": "rest_007",
+    "theme": "Freshness & Taste",
+    "tone": "Foodie & Enthusiastic",
+    "text": "You can immediately tell that quality ingredients are prioritized here. Everything tasted authentic, freshly prepared, and properly seasoned. Even the presentation was thoughtful. The dining area was immaculate and comfortable. Really happy with this find and looking forward to exploring more of the menu on my next visit."
+  },
+  {
+    "id": "rest_008",
+    "theme": "Evening Vibe & Comfort",
+    "tone": "Relaxed & Welcoming",
+    "text": "Came here for a relaxed evening meal and loved the atmosphere. The lighting and background music create a really calm, cozy environment. Service was courteous and welcoming from the start. Food was served piping hot and tasted delightful. An easy five-star experience for me."
+  },
+  {
+    "id": "rest_009",
+    "theme": "Group Outing",
+    "tone": "Social & Upbeat",
+    "text": "Had a get-together with a group of colleagues here. The staff managed our table seamlessly, keeping everything organized and making sure everyone's preferences were looked after. The food variety was fantastic, and everyone in our group enjoyed their meal. Great ambiance for conversations."
+  },
+  {
+    "id": "rest_010",
+    "theme": "First-Time Experience",
+    "tone": "Impressed & Delighted",
+    "text": "This was my first time visiting and it definitely exceeded expectations. The place was clean, well-organized, and buzzing with good energy. The staff were very helpful in explaining options on the menu. The food tasted excellent and felt like it was made with real care. I'll certainly be back!"
+  },
+  {
+    "id": "rest_011",
+    "theme": "Cleanliness & Standards",
+    "tone": "Detailed & Reassuring",
+    "text": "Very impressed with the cleanliness and hygienic presentation of the restaurant. Tables were spotless, cutlery was well-maintained, and the overall upkeep is commendable. On top of that, the food was delicious and served promptly by polite staff. Great standards all around."
+  },
+  {
+    "id": "rest_012",
+    "theme": "Weekend Dining",
+    "tone": "Breezy & Satisfied",
+    "text": "Dropped in over the weekend for a meal. Despite being fairly busy, the staff managed the floor effortlessly and our wait time was very reasonable. Food quality was top-notch—freshly cooked and rich in taste. A lovely place to spend time and enjoy good food."
+  },
+  {
+    "id": "rest_013",
+    "theme": "Consistent Quality",
+    "tone": "Loyal & Trustworthy",
+    "text": "Whenever I visit, the quality remains remarkably consistent. The flavors are always on point, the service is dependable and courteous, and the environment is pleasant and welcoming. It is always a pleasure dining here."
+  },
+  {
+    "id": "rest_014",
+    "theme": "Cozy Ambience",
+    "tone": "Quiet & Appreciative",
+    "text": "A lovely place with a comfortable and peaceful setting. It's the kind of spot where you can take your time, enjoy your conversation, and savor every bite. The team was friendly, polite, and attentive without hovering. Great food and lovely vibes."
+  },
+  {
+    "id": "rest_015",
+    "theme": "Balanced Flavors",
+    "tone": "Balanced & Constructive",
+    "text": "Really enjoyed the balanced flavors across the dishes we tried today. Not overly greasy or heavy, just fresh and thoughtfully cooked. The dining space has pleasant decor and neat seating. Service was cordial throughout. Will definitely recommend this to friends."
+  },
+  {
+    "id": "rest_016",
+    "theme": "Solo Dining",
+    "tone": "Comfortable & Casual",
+    "text": "Dined solo today and felt completely comfortable. The team was welcoming from the start and checked in just the right amount. My order came out hot and fresh in no time. Great peaceful environment to enjoy a wholesome meal."
+  },
+  {
+    "id": "rest_017",
+    "theme": "Hospitality & Care",
+    "tone": "Heartfelt & Kind",
+    "text": "Superb hospitality! The staff went out of their way to ensure we had a comfortable seat and were happy with our selections. The food was delicious and full of flavor. It's refreshing to experience such genuine warmth and customer focus."
+  },
+  {
+    "id": "rest_018",
+    "theme": "Modern Dining Experience",
+    "tone": "Crisp & Modern",
+    "text": "A well-run establishment with modern decor and prompt customer service. The ordering process was smooth, our food arrived without unnecessary delay, and everything tasted fresh and flavorful. Definitely worth stopping by."
+  },
+  {
+    "id": "rest_019",
+    "theme": "Flavorful Experience",
+    "tone": "Short & Punchy",
+    "text": "Fantastic experience from start to finish. Welcoming staff, clean tables, and consistently flavorful food. Everything we ordered was prepared with care. Will be returning soon!"
+  },
+  {
+    "id": "rest_020",
+    "theme": "Dinner with Friends",
+    "tone": "Joyful & Social",
+    "text": "Had dinner here with close friends and we had an incredible time. The lively yet comfortable ambiance set the right tone for the evening. The food was fresh, vibrant, and thoroughly enjoyed by everyone. Kudos to the attentive staff as well."
+  }
+]

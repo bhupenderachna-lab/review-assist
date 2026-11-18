@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Google Reviews Official Standee (Symmetrical QR &amp; NFC • 3 Luxury Tiers)</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Google Sans", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #090d16;
+      color: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 12px 60px;
+      min-height: 100vh;
+    }
+
+    /* Top Control Toolbar */
+    .toolbar-wrapper {
+      width: 100%;
+      max-width: 720px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      padding: 16px 20px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .toolbar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .toolbar-title h2 {
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toolbar-title p {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 2px;
+    }
+
+    /* Theme Switcher Tabs */
+    .theme-selector-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      background: #030712;
+      padding: 4px;
+      border-radius: 12px;
+      border: 1px solid #1f2937;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      color: #9ca3af;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover { color: #ffffff; }
+
+    .tab-btn.active {
+      background: #1f2937;
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .tab-btn.active.gold-tab {
+      background: linear-gradient(135deg, #c5a059, #8c6d2d);
+      color: #0b0c10;
+      border: 1px solid #f5d77f;
+      font-weight: 800;
+    }
+
+    .tab-btn.active.plat-tab {
+      background: linear-gradient(135deg, #065f46, #047857);
+      color: #ecfdf5;
+      border: 1px solid #34d399;
+      font-weight: 800;
+    }
+
+    /* Actions Row */
+    .toolbar-actions-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding-top: 4px;
+      border-top: 1px solid #1f2937;
+    }
+
+    .badge-size-info {
+      font-size: 11px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .action-btn-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.15s, background 0.15s;
+    }
+
+    .btn-action:active { transform: scale(0.97); }
+
+    .btn-download-one {
+      background: #10b981;
+      color: #ffffff;
+    }
+    .btn-download-one:hover { background: #059669; }
+
+    .btn-download-all {
+      background: linear-gradient(135deg, #c5a059, #8c6d2d);
+      color: #0b0c10;
+      box-shadow: 0 2px 8px rgba(197, 160, 89, 0.4);
+    }
+    .btn-download-all:hover { filter: brightness(1.1); }
+
+    .btn-print {
+      background: #2563eb;
+      color: #ffffff;
+    }
+    .btn-print:hover { background: #1d4ed8; }
+
+    /* ==========================================================================
+       ACTUAL PHYSICAL SIZE STANDEE CARD (Standard 4" x 6" / 105mm x 152mm)
+       100% COMPLETE & FULL - EXACT SAME SIZE FOR QR AND NFC LOGO
+       ========================================================================== */
+    .standee-container {
+      width: 105mm;
+      height: 152mm;
+      border-radius: 16px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+      padding: 14px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      justify-content: space-between; /* 100% full vertical distribution */
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      transition: all 0.25s ease;
+    }
+
+    /* Top Accent Stripe */
+    .top-accent-stripe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      display: flex;
+    }
+
+    /* 1. Header: Google G & Headline */
+    .standee-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 4px;
+      width: 100%;
+    }
+
+    .google-g-svg {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .header-headline {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+    }
+
+    /* 2. Stars & Business Name */
+    .biz-info-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      margin: 0;
+    }
+
+    .stars-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    .star-icon {
+      font-size: 19px;
+      line-height: 1;
+    }
+
+    .biz-name-title {
+      font-size: 16.5px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 92mm;
+    }
+
+    /* 3. UPPER ZONE: PROMINENT ENLARGED QR CODE BOX */
+    .qr-card-section {
+      width: 100%;
+      border-radius: 14px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; /* STRICT LEFT ALIGNMENT: Identical to NFC Box */
+      gap: 14px;
+      min-height: 122px;
+    }
+
+    /* ENLARGED IDENTICAL SIZE FOR QR CODE: 106px x 106px (EXACT SAME POSITION AS NFC) */
+    .qr-frame {
+      width: 106px;
+      height: 106px;
+      background: #ffffff;
+      padding: 5px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      flex-shrink: 0;
+    }
+
+    #standeeQr canvas {
+      display: block;
+      width: 96px !important;
+      height: 96px !important;
+    }
+
+    .qr-text-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      flex: 1;
+      min-width: 0;
+      justify-content: center;
+    }
+
+    .qr-badge-title {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.1px;
+      line-height: 1.25;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    /* Divider Bar with "OR" */
+    .divider-row {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin: 2px 0;
+    }
+
+    .divider-line {
+      width: 100%;
+      height: 1.5px;
+      background: currentColor;
+      opacity: 0.18;
+    }
+
+    .or-bubble {
+      position: absolute;
+      font-size: 9.5px;
+      font-weight: 800;
+      padding: 2px 10px;
+      border-radius: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    /* 4. LOWER ZONE: NFC CARD (ENLARGED EXACT SAME 106px x 106px SIZE & ALIGNMENT) */
+    .nfc-card-section {
+      width: 100%;
+      border-radius: 14px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; /* STRICT LEFT ALIGNMENT: Identical to QR Box */
+      gap: 14px;
+      min-height: 122px;
+    }
+
+    /* ENLARGED IDENTICAL SIZE FOR NFC LOGO: 106px x 106px */
+    .nfc-logo-badge {
+      width: 106px;
+      height: 106px;
+      border-radius: 12px;
+      background: #ffffff;
+      padding: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .nfc-uploaded-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .nfc-text-col {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      text-align: left;
+      flex: 1;
+      min-width: 0;
+      justify-content: center;
+    }
+
+    .nfc-title {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.1px;
+      line-height: 1.25;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    /* 5. Speed Callout: No Typing Needed */
+    .speed-callout-pill {
+      width: 100%;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 7px 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+
+    /* 6. Footer Verification */
+    .standee-footer {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 8.5px;
+      font-weight: 600;
+      padding-top: 6px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* ==========================================================================
+       EDITION 1: GOOGLE CLASSIC (OFFICIAL WHITE & BLUE)
+       ========================================================================== */
+    .theme-classic {
+      background: #ffffff;
+      color: #1f2937;
+      border: 1px solid #e2e8f0;
+    }
+    .theme-classic .top-accent-stripe {
+      background: linear-gradient(to right, #4285F4 25%, #EA4335 25% 50%, #FBBC05 50% 75%, #34A853 75%);
+    }
+    .theme-classic .header-headline { color: #202124; }
+    .theme-classic .star-icon { color: #FBBC04; }
+    .theme-classic .biz-name-title { color: #1a73e8; }
+    .theme-classic .qr-card-section {
+      background: #f8fafc;
+      border: 1.5px solid #e2e8f0;
+    }
+    .theme-classic .qr-frame { border: 1.5px solid #cbd5e1; }
+    .theme-classic .qr-badge-title { color: #1e293b; }
+    .theme-classic .qr-badge-sub { color: #64748b; }
+    .theme-classic .or-bubble { background: #e2e8f0; color: #475569; }
+    .theme-classic .nfc-card-section {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 1.5px dashed #3b82f6;
+    }
+    .theme-classic .nfc-logo-badge { border: 1.5px solid #bfdbfe; }
+    .theme-classic .nfc-title { color: #1e3a8a; }
+    .theme-classic .speed-callout-pill {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #15803d;
+    }
+    .theme-classic .standee-footer { border-top-color: #e2e8f0; color: #64748b; }
+
+    /* ==========================================================================
+       EDITION 2: 24K ROYAL OBSIDIAN & CHAMPAGNE GOLD (ULTRA LUXURY VIP)
+       Real Luxury: Deep Pitch Onyx Black + Double Gold Hairline Border + Foil Glow
+       ========================================================================== */
+    .theme-gold {
+      background: radial-gradient(circle at 50% 20%, #14120e 0%, #080808 100%);
+      color: #fbf0d9;
+      border: 2px solid #c5a059;
+      outline: 1px solid rgba(197, 160, 89, 0.4);
+      outline-offset: -5px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 0 40px rgba(197, 160, 89, 0.08);
+    }
+    .theme-gold .top-accent-stripe {
+      background: linear-gradient(90deg, #8c6d2d, #f5d77f, #c5a059, #f5d77f, #8c6d2d);
+      height: 5px;
+    }
+    .theme-gold .header-headline {
+      color: #f5d77f;
+      letter-spacing: 0.5px;
+      text-shadow: 0 2px 10px rgba(245, 215, 127, 0.3);
+    }
+    .theme-gold .star-icon {
+      color: #f5d77f;
+      filter: drop-shadow(0 2px 6px rgba(245, 215, 127, 0.6));
+    }
+    .theme-gold .biz-name-title {
+      color: #ffffff;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .theme-gold .qr-card-section {
+      background: linear-gradient(135deg, #16140f 0%, #0d0c09 100%);
+      border: 1.5px solid #8c6d2d;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .theme-gold .qr-frame {
+      border: 2px solid #c5a059;
+      box-shadow: 0 0 12px rgba(197, 160, 89, 0.3);
+    }
+    .theme-gold .qr-badge-title { color: #f5d77f; }
+    .theme-gold .qr-badge-sub { color: #d4cfc5; }
+    .theme-gold .or-bubble {
+      background: #241f17;
+      color: #f5d77f;
+      border: 1px solid #8c6d2d;
+    }
+    .theme-gold .nfc-card-section {
+      background: linear-gradient(135deg, #1b1710 0%, #110f0a 100%);
+      border: 1.5px dashed #c5a059;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .theme-gold .nfc-logo-badge {
+      border: 2px solid #c5a059;
+      box-shadow: 0 0 12px rgba(197, 160, 89, 0.3);
+    }
+    .theme-gold .nfc-title { color: #f5d77f; }
+    .theme-gold .speed-callout-pill {
+      background: linear-gradient(135deg, #261f14 0%, #1a150c 100%);
+      border: 1px solid #8c6d2d;
+      color: #f5d77f;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .theme-gold .standee-footer {
+      border-top-color: rgba(197, 160, 89, 0.25);
+      color: #a89f91;
+    }
+
+    /* ==========================================================================
+       EDITION 3: EXECUTIVE EMERALD & PLATINUM CHROME (BOUTIQUE LUXURY)
+       Real Luxury: Deep Midnight Emerald + Polished Silver Chrome + Glowing Accents
+       ========================================================================== */
+    .theme-platinum {
+      background: linear-gradient(180deg, #041a14 0%, #020d0a 100%);
+      color: #ecfdf5;
+      border: 2px solid #34d399;
+      outline: 1px solid rgba(52, 211, 153, 0.3);
+      outline-offset: -5px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), inset 0 0 35px rgba(16, 185, 129, 0.1);
+    }
+    .theme-platinum .top-accent-stripe {
+      background: linear-gradient(90deg, #059669, #34d399, #a7f3d0, #34d399, #059669);
+      height: 5px;
+    }
+    .theme-platinum .header-headline {
+      color: #ffffff;
+      letter-spacing: 0.3px;
+      text-shadow: 0 2px 10px rgba(52, 211, 153, 0.3);
+    }
+    .theme-platinum .star-icon {
+      color: #34d399;
+      filter: drop-shadow(0 2px 6px rgba(52, 211, 153, 0.6));
+    }
+    .theme-platinum .biz-name-title { color: #a7f3d0; font-weight: 700; }
+    .theme-platinum .qr-card-section {
+      background: linear-gradient(135deg, #06231b 0%, #03140f 100%);
+      border: 1.5px solid #059669;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .theme-platinum .qr-frame {
+      border: 2px solid #34d399;
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.35);
+    }
+    .theme-platinum .qr-badge-title { color: #a7f3d0; }
+    .theme-platinum .qr-badge-sub { color: #cbd5e1; }
+    .theme-platinum .or-bubble {
+      background: #064e3b;
+      color: #a7f3d0;
+      border: 1px solid #059669;
+    }
+    .theme-platinum .nfc-card-section {
+      background: linear-gradient(135deg, #072a20 0%, #041913 100%);
+      border: 1.5px dashed #34d399;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .theme-platinum .nfc-logo-badge {
+      border: 2px solid #34d399;
+      box-shadow: 0 0 12px rgba(52, 211, 153, 0.35);
+    }
+    .theme-platinum .nfc-title { color: #6ee7b7; }
+    .theme-platinum .speed-callout-pill {
+      background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+      border: 1px solid #059669;
+      color: #a7f3d0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .theme-platinum .standee-footer {
+      border-top-color: rgba(52, 211, 153, 0.25);
+      color: #94a3b8;
+    }
+
+    /* Print Specs: 100% scale A6 / 4" x 6" */
+    @page {
+      size: 105mm 152mm;
+      margin: 0;
+    }
+
+    @media print {
+      html, body {
+        background: #ffffff !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .toolbar-wrapper {
+        display: none !important;
+      }
+      .standee-container {
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        width: 105mm !important;
+        height: 152mm !important;
+        border-radius: 0 !important;
+        page-break-after: avoid !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Controller Toolbar -->
+  <header class="toolbar-wrapper">
+    <div class="toolbar-header">
+      <div class="toolbar-title">
+        <h2>✨ Official Google Standee Designer</h2>
+        <p>100% Full Vertical Design • Symmetrical QR &bull; NFC Logo • 300 DPI</p>
+      </div>
+    </div>
+
+    <!-- 3 Tier Tabs -->
+    <div class="theme-selector-tabs">
+      <button class="tab-btn active" data-theme="classic">
+        <span>⚪</span>
+        <span>1. Google Classic</span>
+      </button>
+      <button class="tab-btn gold-tab" data-theme="gold">
+        <span>👑</span>
+        <span>2. 24K Royal Gold</span>
+      </button>
+      <button class="tab-btn plat-tab" data-theme="platinum">
+        <span>💎</span>
+        <span>3. Emerald Platinum</span>
+      </button>
+    </div>
+
+    <!-- Actions Row -->
+    <div class="toolbar-actions-row">
+      <div class="badge-size-info">
+        <span>📐 105 × 152mm (4×6")</span>
+        <span>&bull;</span>
+        <span>🖨️ 300 DPI Print Ready</span>
+      </div>
+      <div class="action-btn-group">
+        <button class="btn-action btn-download-one" id="btnDownloadSingle">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Download Current PNG</span>
+        </button>
+        <button class="btn-action btn-download-all" id="btnDownloadAll">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>📦 Download All 3 Editions</span>
+        </button>
+        <button class="btn-action btn-print" onclick="window.print()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+          <span>Print</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ACTUAL PHYSICAL SIZE STANDEE CARD (100% COMPLETE & FULL) -->
+  <main class="standee-container theme-classic" id="standeeBox">
+
+    <!-- Top Accent Stripe -->
+    <div class="top-accent-stripe"></div>
+
+    <!-- 1. Google Reviews Header -->
+    <div class="standee-header">
+      <svg class="google-g-svg" viewBox="0 0 24 24">
+        <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.66-5.17 3.66-9.12z"/>
+        <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.24v3.13C3.26 21.36 7.34 24 12 24z"/>
+        <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.58H1.24C.45 8.14 0 9.97 0 12c0 2.03.45 3.86 1.24 5.42l4.04-3.13z"/>
+        <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.58l4.04 3.13c.95-2.83 3.6-4.96 6.72-4.96z"/>
+      </svg>
+      <h1 class="header-headline">Review us on Google</h1>
+    </div>
+
+    <!-- 2. Stars & Business Info -->
+    <div class="biz-info-block">
+      <div class="stars-row">
+        <span class="star-icon">★</span>
+        <span class="star-icon">★</span>
+        <span class="star-icon">★</span>
+        <span class="star-icon">★</span>
+        <span class="star-icon">★</span>
+      </div>
+      <div class="biz-name-title" id="standeeBizName">The Olive &amp; Oak Bistro</div>
+    </div>
+
+    <!-- 3. UPPER ZONE: PROMINENT ENLARGED QR CODE BOX -->
+    <div class="qr-card-section">
+      <div class="qr-frame">
+        <div id="standeeQr"></div>
+      </div>
+      <div class="qr-text-col">
+        <div class="qr-badge-title">
+          <span>📷</span>
+          <span>SCAN QR CODE TO RATE US</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center Divider: OR -->
+    <div class="divider-row">
+      <div class="divider-line"></div>
+      <div class="or-bubble">OR</div>
+    </div>
+
+    <!-- 4. LOWER ZONE: NFC CARD (EXACT SAME POSITION & SIZE AS QR BOX) -->
+    <div class="nfc-card-section">
+      <div class="nfc-logo-badge">
+        <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQACWAJYAAD/4QAC/9sAhAAIBgYHBgUIBwcHCQkICgwUDQwLCwwZEhMPFB0aHx4dGhwcICQuJyAiLCMcHCg3KSwwMTQ0NB8nOT04MjwuMzQyAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wgARCAFeAV4DASIAAhEBAxEB/8QALwABAAMBAQEBAQAAAAAAAAAAAAYHCAUEAwIBAQEBAAAAAAAAAAAAAAAAAAAAAf/aAAwDAQACEAMQAAAAv8AAAAAAAAAAAAAAAAAAAAAAAAAAAAABwIEW4zpwTVP8yr/DVjKg1Wy1JTQCsZ4dIAAAAAAAAAAAAA/B+/LVdVlqVjZ1pmdbAtURzv8A0AAHmjMvFN1/qQZgtqWVAXt+spXgT0AAAAAAAAAAr4kGdvloorm5fsAAAAAAAAOXQujhnHQUEpY1g4HfAAAAAAABXx4qraaPl7QFdliOR1wBBpDmo6vm0N7zNS9o6VWteema5TdlaFnenPmgwBG5IMm6L9WajWTidsAAAAAH4ODnH66FOz7AA5PHoi8yhtS1Rzy7QV7FpRGS6VKQ8uSFw8TO5M0DTf8AMzX2Zy1ZlPVgAAi0pGU9S1hGS/AAAAAKhtXKpZF1/H7A5pwYPc2YzRGZdC1sXdlS7IqXP6K7sQryMyaMkC0hm/UJ4nSHNdIUFY8An5ROrMd6zOiAABmDT8aPnKcx6cAAAAKhVjqE9YFLXT8ipJfQWqjP9sUHpwoeyqY0AVXeudNFleRmTRkgWocvahPqACip/AJ+Zokfju+J76sv6br6gAAzTeHMrkv8AADgd+oyDaVqq1QAQoobUmeLJKj0pT03KcvirJoV3oik7sK8jMmjJAtQ5e1CfX8fuDldcr3WOVraOWdTFA60yZrMqiC6RpMur9UPfAAB+coaxziaN/sckYAAzpovKxoWSfP6ACtrJEczlovmEjoa2qXLtq288ul+TT8/oryMyaMkC1Dl7UJ9eb0hlPVdBzogkktHLA1hkzWY/n9GdJpaWVTV7we8AVHbkHOJadFXqAAMqaqyoasAAABmHRPVqsh07r/RQBXkZk0ZIFqHL0yL0UcLZznM6oNkQzs9oydrHxe0AU9cMZIlaec9GACPyDlFEaMzPpgAAZU1XlQ1WAAABH5APn9AAgUKunK5o3lRroHVcodWCyXinstzN2kQAB+f0Mp6syrqU+oHJ60ZKP0tnjQ4AAy1qXP5e/piEvAAAAAAHg94qvzW6KiW6KiW6Mlawp77lvgAAz1bXhpU1Gzx0i9a/n1NHwu6t7IAAFZWbzSrbky3qQAUpdeRC47YxBqUnVE3tjc053aylpUfyq22zzf3pf0tuQ8WCHQqyt7WOROedVBsXLt79s8EqydfxMwDgnoy799BHOqu1KUNBUZo7MBpfrAAABmDQsUhhfAGRNd5EOX+rfryTTeTe9Hi75bEpbbkzT+YPtJqroZG71uvcfbAxSWjoanbiH8/oA5eZtW80jk1yjZ5N86/rSp5Yv4a+PNpj6+grDiQDSp1AAAAfnKmrYESnqZy0aMia7yOWfZ1Z3OYu52ocvyaFlsVlluStmYy2edQDLepI6Zt1RkTnybVrPP3wt2B1olLQCB0Ja3wLUqnm/I8GjP1+hX06ysS3QfM6YAAAABnGyJ1ls1hGf1JDw+4ETlg833/AEIZMwAA88GsEVxNekAAPFSN9ipbaAVgRCUQTSIAAAAAA4HfGTdK+XOhrJFpSAAAAAAAAAACsD3U00yfX0AAAAAAAA4nbGU7Ws+ii/GYL5JMAAAAAAAB8ILSBMuZO7WPP6AAAAAAAAAAAi1GacGabd6dTF+/rJ0jNHKjkhOEf9Z1XJ55Jlfxgufz5r55btS2BapSN39MAAAAAAAAAAAAAAfyOyMVZHb1Gc/HpgZp9+hxSMmsgcnrAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//8QAOBAAAQQCAQAGCAYBAwUAAAAABQMEBgcBAgAIEBEUIDcSExUWFzA1QBghMTQ2QTIjJCUiJ1BgcP/aAAgBAQABCAD/ANt7f/DmZtG4/nOpMpfoJvnOowhfciWxnDNS0Z6U29FHDuziWO3X2HZiv/VnAmzm/wCeuTdmDPzUb3BOB+2NFh3SAKpZxgiJvKKvs66PhR8ScR9aL+9fkWYtpu6fSS9xTLO6AB9NZzOHWzNAJR8oI9ipATQ8baYxsRHQGJiuzLRJBJDT0Euvs45Hs3uvouiNXwwp6WVi9ADFcbbiCtTzSOLZdNQluy+PLd2fRm5I0ezog8031U0xtr9wqqminsorMbvYDsqM42izmdnlMq8jFEimXoLyEcLYCWurUf8AMOxQFJUfVl5RQy6WN3EZES2YVwQ7gpDLWBSv0Gqn20qmYeHju9E5NOJJYpLUc3hdHIpYTeypo0bsWybZr9gcjomSMcsy01pckEwo+AQa4yAPZMfIBhRiZYJPh32dh2cyhyGWbUJHpNaMhWdKRGDh4ax9SP8AtJ9VA2VaqPmAc7JqtkazZSJy8XMROHw37Gz7PTiyOwoVAq9Iz0koSIChTEIOSYDvkTmzRMLxhts9vSWrr52Q+Nsz58bZnz42zPnxtmfPjbM+Yu2Z4zyN324wvojI2D9qUYovWXgl8KFTIXlq/XQktUy/XbWFTQdNA2HjT59nWGnDhmGjOvYE9nphUgSZMm45mk0addh2frBiTJjpGpIPlQVEoN65Sb0jcXIl94VGHlkTFfL8VEY+EaatmHsofySnolEk0NjHxUrniVoVyqtonzQaN31xtrkSOzjOM2RVAwiJclAVEyhZsaWja3hlcVHS8MoOI76SCqJrjOIrJ2EtBIlGHzZlKmcPjyxN1Hghi0Zqso6FC2YUY3HMOttJgjwwsIbT2DMpqGygpD5MTrSXrN3zR0g+apOm3VdO2daze4x0etNe4n9+ueVsxnW7RZX8PLTiXR6YYV1ys3QTat00EuZ/PHK7/wBK2xeumP08U6hbOagtmasRkhSs5isg+ZvG5Bmi7a/LVV0RS3VUnEme2LM0246DRFrDI4kOR8E9iZSASvUizrqcIzWP4W3uuE6khXvKxoqYZVRWizzquvyzec6PX00/yyLWOxuWrBxPxzl/PjnL+fHOX8+Ocv58c5fzW8ZhnP5Qs8pJ4gOMrV/5ujOY/Tx3HA8HBWT46kZxls591X/y7vmORwlONsqOheEm+8re9dmkTYqDu3gGqbTclHmoCQySPspQBciX0fJkKysLOrzGUHrXtwZaOa2svbLVi7RIMG7xvy6/LN5zo9fTT/Lj80SnG4ANlsnnPu+G57vhue74bnu+G5fTBmxXA4aVJ5WhOV/5ujOY/Tx5x28tKIqQ2W6Px1fytOYRRuQz8kg/bixzl86ZovrPsj/VaNUGLRFq26iR8SG3R0J5xqpp2ctWGe50lTfja8lOJdEGpBS+45rpuPkaNLn8mYGk1V6QAXHqhBxOli+SdeIN9+XX5ZvOdHr6af5cfmiU42/apeHpCfuI9ypPK0JwObzHJwkYwDOMJEIQJjfHO4unLom7G5qOTKRia+zXnyb3kuWQJqAQoiM9yBOZCv13nDnT1JGTtaSmypNkpGyFoAtT8AJI4oIxlCQEhG1li8Fq7NIcoAjlKRlR3LfY6vqzK5z0fHucLnh+eXX5ZvOdHr6af5cfmiU42/apeHpCfuI9ypPK0JxuNWMynAxvDJcUreSLtHw4i0LD0H7Hx3TG8hJjqVbwCR4lMMYEtvkTV+vObQXRaCxyAkU1HNetwgk6bKt1o/6cNt1s31WS1XQUS3qbfLS1BaepVLC4h4ltSamU7JZaYnSWFoCf0zQKmcTMjp1XX5ZvOdHr6af5cfmiU42/apeHpCfuI9ypPK0JyHY7bUE8s6t0pax9oD65n7qDFtxhRs5Rdt03DfxWzH8H4E99XQZ/1BYgBU8c1M+78MLE8UeE9pTfcgr4P64U2wZudbupB1owGunalON9nlnD1uHHGrQARc7UehstYzdTlgL4bV8fUzQCOcy8or1XX5ZvOdHr6af5cfmiU42/apdSquiKW6qssvV9u9UbxgLecmZu9clLmOsZINixUdUnlaE5C8dtrieY/TlrVn7fR3OhassnaMutQZnTfVTTG+vhU01U0203QzvALX1xzXOM47ceK/CmW8WHjNaGFYaQ10R28FkTZCHx1TKdJxpQtLdja9zyPQNCFGGlAAtv+UPq28W1FVwR1x0fhm2zw0X2uojhjXDpHnR8H5wzOEtuXX5ZvOdHr6af5cfmiU42/apdVuul2lZFtkKJACyhIoQe2PXzSVgVd2am6+mndFak8rQnIRjttgVzH6dVvVr67VaThKesnu+yMXM+K+BOGsyakNYEUyaggZ/t4r7IYWmDFniAjvZUCCNPDYdW7TYyzIos2oOu4h6vBwqVtGdp6tY2CaxqPMxDS8JPqUkiIRvWcc2jMGYtFr7O4cGhwROqguwOvBqSnLr8s3nOj19NP8uPzRKcbftUuqQB0JAAfCXMLMOa+sXCZDXbG2vbi7IN3N371D6Qljd/HsRtSC47baFcx+nVnHbjltVxkC53kAeo7Hyfb6gC/hv4f66LDSGKHf8AeYM4aZ8Voq5KWsTR1QS1QQTS08M6iekzjKgrNf1wyhDZVXNjTlCGANt06piK0uleSj8uUahBDok9Asndk2VjZ1ppqnrjXXl1+WbznR6+mn+XH5olONv2qXXe8W7u/bSVvT0pzIYbo1cP2LYmwXZPDQwpV0/T2bV2p6+0wy3Mfp1uWyLtuo3cS4M5rqwv+PClEDYVkTbeC3WmHdZF+dHt36Lg+yz4nePaN3Ka5+Q9ikzm9gukScdAMYwEbih90TvUo992h1PQraNx3Yi96rr8s3nOj19NP8uPzRKcbftUuuUAkZLGn4herTa0UsVNm85ZELTmUb3RSrNBXW0gqG+P08F+BcLgBxnSiTGX0KXHb+Cct8OoGfSzQS3ozMgl4wefW3W2zn+vk2/YLiNtdAYyoq63NvE5EW67r8s3nOj19NP8uPH/AHQKZ4n0g/Vpa6c/ENz8Q3PxDclJ1KQSd2aaxE1iQxMYVxxISPQfqP0vBYAv2xATTPFCE+7y18wz4JLr6UVL65onfOLA7PGJx3e7UNc/JkEKj8oWbrGUEEmyGiKPXcbbdzWRLOnR8fI67Hh+x2BRqTPNHhf4QQXnwggvPhBBefCCC8tetwICI6lAdBlsuYuQF7+JTTVRPbTeF77xm3WLffwSjbCcSM75ohPO0/328ZvPsy6nKmcfOIMW5Me4Yuig09Vcz0UQE36EVa6+1fjvEOfHeIc+O8Q58d4hyW25EpHEygjSiSeGk3cMtvHZiGwO1iLhNsvo5bJLp9dhOe6V6fV5QCHbLCq3juBvsPs4gtoPc6vRzZ3r84sGHHWO7Io9oaMLq53bfh/A8/D+B5+H8Dz8P4Hn4fwPHSC9b2ZjGGrhJ21ScoeK/hvqpMLIYrYl7VrsI4z13O97pWb/AE50e2f+3PPc+LpADspng5HlXkvalcBVs/a3rE9nQ9tJWtITLV8J2jLzxWjDFJjGcJtK/sB7Aiao8idvkyu63wFiN6uFX6TSTab6764216QJL0BYYXrSA7LKuknG3ivITl9A8PdKAL+tClQ+/gsG4SQORuAwOt7czJiHsc31Ta5y46TuxgOvZhiaxnBDc0Wbggrwq7c35JN3G+zb48yvnx5lfNb6lONsZ2hUoSmEYbl0+TK3QkXWUYtn94S90pnLZvdM2R3xlSM3y1craN5H/sjQvOOSuPE6ymiSzGDTVlNAmrtDwyKRjYuIVJFDhIlZM2yqygtXCYswwo+uwQIFStn7NrhddxXQFRzdRXJOwlGqUYFYBxgYMx4j4tM2Afi1anLKR2yW7V11/wBZ5YnmNIOJKqILaLI1lO05kC9BzyX/AM1Pc6P/APESfLR8sj/M/l254NokgRFtH2n4fCPNej4Q9PHpRWNtInH24hncU+WjzFMGL013UUxppHaKME2ujkwT6PzpJvncWWAFgRHZgSqgURD18wak5TFx8tCKjCDxlJapl2imkDsIbNmW2E+uWS0ZDw+z8i/ISS1ZYmnpBIEPhI30ErFstpDmuWjWKRQ3ZkjWePN9mYEJttyFNVppajVdz8i3QikesJV82iZ1KSxceXT6v6zyxPMaQcbAnruPPDSEckD6LnG5UfG5CylAJsWYS/8Amp7nR/8A4iT5aPlkf5t+m2OALNhjOODGzj4qwfgidxg88wzGcnRbc3OTL7aiY0iRNPDrrqzrjOcdvUej4ySi1BxSSRs7WEpQctq+sFlNRnZnk0nAyFi+8O005Na8uz2w6Fi4WJw0Y2VaSEWS3FioPAythFlSL8UJZBBqI8dd8iwLhuotKgo/lNiSkKvyLkjOT0L3eIUNKMJOXkZcdX9Z5YnmNIOUG2ReBJI2cWLB1oUeymnWc6Uhh30XMqV0WmBpVLo//wARJ8tHyyP8z+ueYautsYzjujvkNAmicsG6D/64US3RMP0lOj64T2jphtjxHQQ+SCFhhORxw7V8pQctk7zF4hvfNxAeR2pK1VlIvFhkRD6DxtnWtoEwqEAV3Wr2au/apVixbDWSTNnywTa05sPZEfHAyEejzES3+RvpqppnXaWCHdcWJ6bCOnGskAMyzPn9Z5YnmNIOdHr6af5Ko0ylgBcU+OhHsdNORRDnR/8A4iT5aPlkf5t/jtyL/wASDdXZ1W9HVAU7dOda7mW0KkurtUYVYmWKb0dvvqnpnbaRXaACku5Mo5IWEpCIFRvXbhIYPgLvUlBoIRmxP1SAAANjIlIaLs62sNvXAo1WdWLSXdMycQQSaoaIoctuX4jMT3bNqLieXhZaSOflWrDPeuLbKNaXmuAhnYA+5/XLIS3Ssg/qp0e0t8CDqueWjAdZeF70z202T3203oFFTSGkFNrNT3WrU/ont/jtyNp7oxcSkp1zOIsZmB3HO5LFC8SIZaFR5QiJVyqOfyM4VS9UQFin5p+mxG1xFFYdEUhrnr6QLNdWPiHelOTaOjIlsJIWXb2H6SgaMVhU2xLCJyRaaap6Y1148eNx7NZ26OkyVn2BrhpHgbSNgmgll8u44NkGXzIB9UT7EqDdwf8AJHAI3K3CbkqIDjwI5MeM6jNaxM+R2IEB49oKYpMmO+mqmm2m7aqoa0LakkvC9YNCLXds9fUxC3qmd9G1IwxupjZQQAEgW3dxXgKimZsW4HECvR/fYd7ZDw6kmIV6mQOfp13RPsPl9ouMpuCZBisniPzCgxoZGOBz46HM1bNUlG0Kl7GZgtH7X7q17H1jLHIgXUlfbSIjg8V+dLomPmINQc+bryKqZptrtFJWNl4bQiO+4siyG0OZZZtILCiViH1nxBiybDWSLNn8+aQodNBGWjzTeTVRLs4zCp2Kmo71zT7axrXaxnVQWIhUFL2IZVIPhQpkEGojx/2MniouXCtmBSSRKR1mbSfIQK42BzCY49jPb9m8eNh7RR07n10KvtVRkWr6pHkj3TKnWLJsNZJM2f2bxm2INFGrucUks2yq/isRtKQQ1bA5/F54AlyOMjfsJfbkfjOFGzYmdl1nmdGmIJTbAHsmRPYx2fbyuAAJglnJCS1FJoytl4Njd0SMJnVsVj1sxM/jRPmimqmmN9PlPHzQc32cPZFd8cF43SFm7BmE5c+z0YnRb95lNzJAceFRthhkJ+6kUAjcpxtsSP0G/Q9NQDlGfQDfPYJviRtcY1IDr+ArdmCDS3YQ71xxvOYo6x2payUDtjt13lEfT/zc2FEGnb615c8JaYz6sl0gmGmNtRhW6peTzlJo1hU8mjjVyvH6Dap51WkAWOCI817uJ++zjGcZxkpAoqaznZ+/oeLOe3LR10e1tc5yyWoGS69vqtqJluM/knREt2z+aFAH9s49cz6PaOOzL0fSMOZZ12cCowDB64wM/wDiv//EAFAQAAIBAgEHBQkNBAkEAwEAAAECAwQRAAUSITFBUWETInGBoRAUIDJCUpGxswYjMEBTYnKClLLB0dJUkqLiFSQzVZOjpMLhNENEcCVjc5X/2gAIAQEACT8A/wDSmWKSGQf9oPnyfurc9mMm1taw8p7QofTc9mMn5Oo1OpnzpWHpIHZjKtRp1LR0yj1KTiT3Uyg+asyjsAxSe6ZumSUf7sU3uoW21XlPqOKr3SxAfLRyMP4gcZSjmt5NVSpfsAOMiUdQm1qeVoj6DnDC1mTnOszRZ6D6yX9WMo0tYlr+8yhiOkax1/HqqGmp08aWZwqjrOKN8oyjQJ5bxwg8PKb0DpxUVkof/wATJsZRQOObp/eOHpclxtpIkblJP3V0ek4q63KEg1jPESHqXT24yBQKw1O8Qkb0tc4jSNPNRQB2eDSwTrqtLGHHaMZCponby6a8JH7pAxliqpW2R1KCVfSLEduKY1Yj0ioydIS4+roYdV8S/wBIRxmzw16kSL9fQw674dslVbaMyqI5MnhINHptggqRcEG4I+MuqRoCzMxsAN5OzEaZQqRdTVPfkEPDa/VYcTjvnKBU2MshzKeDgPJXoGnFU2UJhpMERMcI4E+M3Z0Yo4KWBdUcMYQdnwuTYKk2sJGW0i9DjSPTit5ZdfelWQG6FfUesdeOXhRDd8n1qkxkb13dKm3Thv6Pym2jvadtDn5jam6NB4fF5+ewPI08emSY7lG7eToGIpVppGtDk2lu2dxc+UeJ0DhiQTSaCKCJuYv02HjdA0cTiCOCCMZqRxqFVRwA+I0UVTF5OeOch3q2tT0YaTKNCvOMJHv8Q6vHHRp4HHK1+TxzVmOmeAcb+OBuOkbzqxUx1NLKLpLGbg/keB0j4oEqssut1gvzYQdTSW7F1ngNOJnluw75r5xzIhsUDfuQdmvEOdUOAJqqQAySnidg4DR8V5Ohyxr5UC0c53SAbfnDTvviJ4iGHfNDMfe5l2MCOxx26sS85bCaB/7SFtzD1HUfiTJJlqRdLa1pVOpm3tuHWeMs8eTBIWqKtjeSoe+lVJ1ne2zpxTR09LEuakaCwHHiTtJ0n4FDWZTZc5aWNrZoOou3kj0k7sHJ1GmxFhz9HSx04r6L7Kn54r6L7Kn54r6L7Kn54r6L7Kn54r6L7Kn54rqE9NKv54yfE0DaDU0YIK8ShJuOg34HE8c9NMoeOWM3DA+DHmToCYKpAOUhbhvG8HQe3DclOmlJBcw1UV+0HaNYPpweTqI7LU0zG7Qt+IOw7en4gVfLNSh5FDpEK6uUYeobTwBxJMMmRylqqoYnPqHOkop3nadl95xCkNPCoSOONbKqjYB4GTDWSzx8s5aXk1VM4iw0G5Nj0Ykzon0MjeNG41qw2Ef8+AobvWEuqnyn1KOskYqZDHc1NfU+UbnUOJOgbgOGMk0kSAWvyQZm4ljck9JxQ03+Cv5YFLC05PJItMHZrazYDUN+GH/85v04liTOIGdJQMqjpOboHHFHSlSLgiJSCPRihpSDsMK/likjpMpwIZTFAualQBpIzRoDW1EdBxIWpatGnp1PkSKLsB9JdPSvhR/OimUc+F9jKfw2jRghZ4tIOnkquEntBt0qeIwxzW5skTHnRONatxHaLH4azuOZBDexlkOpRw2k7ADidyZG5atqraIk1AKN+xRw4HEKw0sCBI0XYPxJ1k7T4GVKSXKEN+Up0lBdba9HDbuxmw18ILUtTbxG3Hep2jr2YilSDlORyhSHToGp13kawdoPHEqywSoHjkU3DKRcEd02DTQA8RygwBnGaEX4Zrfn3a2ajqaYMiyRqHDITexB47ce6So+yL+rHuhqnivz0WnVSw2gG5t02wubHEgRBuAFh3eaBWyqLbrOLeHmxVcV3pai2mN+PzTqI/EYhkWEPyOUKTeBqZd5GsHaDbbiVZaeZBJHIhuGU6QR8IypGgLMzGwAGsk4R5aZZO9snwDyrnxzuLa+AA3YzXqG98qZwNMshGk9A1AbvBnl72mnaejrFNmR7lijfOF/rDrGM2PKNPZKuFdQbYw+a3YbjZiP+u0SWqQo0yQ+d0re/RfcMSXaIGaiLHyL89OonOHAnd3fl4PaDHy8P3TiKkSKnjQu80ZdnZlzt4sACMTZM+zfzYmyZ9m/mxNkz7N/NibJn2b+bE2TPs382JMmnopv5sQrDLUxkuiG6hgxU24XF8ft8vqk+AivlKiT31FGmeEaSOLLrHC43Yl94mJegZjoV9bR9B0kcb7/AISS1TXLn1JU6Uhv4v1iPQDvxH75KDFQhh4qamk69Q4A7/AzhVRsvKSIoZo4r89gDu7Bc7MVHK1Up/qlW9gZD8m1tF9x26tdrreKZdDgc6Nh4rLxBwCop5TT1sa6pIidLDqs4xmSwTJ0q6sPUQe3Gdm0NQtRT/PhbSB1qSp6MNnQTxrLG29WFx2HufLwe0GPl4funHmQezXGSaC+Yv8A4ybujGSaD7Mn5YyTQfZk/LGSaD7Mn5YyTQfZk/LFJBTh1nzuRiVM6xTXYY8yT2rY/b5fVJ8CGhoax++KZk0cjKDdlG6xsw4HhjNFWnvVUg8mUa+o6COn4JxHT08bSyMdigXOCymunMkpH/YgXYOhbAcTiNY4IUEcaLqVQLAd3KNLRtO2bEJ5Qhc8L4sVI6QcBocnVjGWDM0chKDcqN1tDL/xgjvtPeapRskXWegizdeE0ue9Kkga9ZjJ/iHow+dPk1zStc6Slrof3Tb6uF0qzUkrcDdk7Q3pw15KCV6Y315o5y9jAdXc+Xg9oMfLw/dOPMg9muPMX1eD5s/rTHmSe1bEPL96VruY72zhnMCL77E2xMJaaZbqdRU7VYbCNRHwAAqLcrSufIlXxeo6QeBwWipcoN3tMj6OTmBIQnrup6eHwT2lr25ScA6REh1dbW/dOEtNXtyUBOyFTpPW1/3R4DGVKSHkamG182POJDjgCdI6DsOJS9RRx59K7nS0INipO0rcW4HhhA09NH31BvDpp7RnDrw/vVVTidAfPQ2PpVuzCgvHTmePg0fPHq7cNZKilWYDeyNb1PgXamCVC8Cri/YTg6CIZ1H7yn8O58vB7QY+Xh+6ceZB7NceYvq8HzZ/WmPMk9q2GRZquseKMvqDFza/DEEwpTJyddRN4ykeWvzh6GHUcTpPSzoHjkQ3DA/AKUp8pgy5y6M2ZfH9PNbpJwwNRmclUDdKuhvTr6/gWzxLUrQUttQVTm36L5zYXNgpoliQcFFvAQPFKhR0bUykWIPVhyFpMpmkY742Yp91gcC6upUjgRbGotNCeIzG/IY0q8EinoKkYOh6WZD+7f8ADGo0Ex9CE41Nk8k9Uifn3Pl4PaDHy8P3TjzIPZrjzF9Xg+bP60x5kntWx/e3+9sKkeW4E5h1CoUeQx37js1atSyjJUkpWohZTnU0l7FwPvDbr165ElhkUOkiG6sp1EHaPDTOqqH+tw2Gnm3zh1qW7MP73UoKmAE+WuhgOlSD9X4A2khp2ER+e3NXtIwM6PJsBkBIveR+avZnHwucJ8tqqEbbSAX/AITggJBE8rE7AoJ/DAuIo5p24cwj1sMGyw0srk9CE4H9jRyueFwF/wB2Do7xlX0rb8cDQlBm3+lIv6e58vB7QY+Xh+6ceZB7NceYvq7jqkaKWZmNgoGsk4ihhpENhV1CZ7ScVU6FG69z0YSlyjTXGeojEUgHzWXRfpGJM+mnSoIuLMpBQFWGwg68eZJ7Vsf3qfvN3Ih/S0S3mhUW76UbvnjZv1bsSN/REj2jkfXSOT9wnWNh078EFSLgg3BHhAMrAgg6iMFljyflHNPGBjb7jYNxsPhmxrKrPax1pGL+sr6MLZ66qax3ogzR253gyKcqVStHSRbQdRc8F19NhhS1Lk0Fg7eXOwIA6gSx6t+HtVZTPe6AHSI9cjejR9bC2U2pICRrtznP3R1HDWlrM2kj068887+ENgWVUSlQnaSc5vUuDZq2aOnHEZ2cexThdEksdOjfRBY/eHc+Xg9oMfLw/dOPMg9muPMX1dwkGQRxMRsRnAbsNuvEMU9RRiNYI5FDBM7Ou9jt0WB2acU0MWWKcF6eVVCmS2uNjtB2X1G3HBkVYpGPJNozH0BtGw80A9GPMk9q2P7zb1v3YPfhd66njHjjbKo3jyht1673m96YhKCoc+KdkRO7zT1bvDWyV9IAx3uhzT2FcG7vSqshv5a81u1T4ZutJRZxHznYn1KMaGWkR2HzmGce1vByoKN4ohBKrxFwUDEgrpFjpPDVh1psnUaFpJX0s7HWx3sx2dAGIWDztyFHATcQxDTdu1mP/GP7KmjCliNLtrZjxJucPnU+TATLbbM2sfVFh0k4TNqph3zUDaHfTbqFh1YcZlJGaia3nvoUdSgn62EzZ6lTVSji+kehc0dz5eD2gx8vD9048yD2a48xfV3P7KqhaMnzTsbqNj1YvHGkrUVeuwKTbO6jZhwwQQdoxF7xOwWuRR4kh0CTobUeNt+AsdZk+7Ri/wDaxMxOd0gmx6Qcf3k/+/wIrZLme9REg/6ZydY3IT6DwIxLfKkCe8zMdNTGN/zwNe8ad/hDnUtZmE7ldSPWq4N2pKx1A3KwDDtJ8PT79DSqPqqPWTgWVFCjoAt4VU1M/KLLHKFzgGW9rjaNJxKKvKc4zZKkpmhV8xRsG/aeoYZXypUgpSRHTp2uR5q9psMBpaCik5ed5NPLTE5yqd+nnH/nD5lNTRmSQ8BsHEnQOnCkisqDU1VtUcKm5X0WQdOAFUCwAGodz5eD2gx8vD9048yD2a48xfV3Y/eqm1PVWGpwOYx6RcdQxJnVuTSKeW50sluY3o0dK4iWWnnjMckbDQykWIxI16eQT0kx1TRE2seq6sP+MLblK1ntfVdXNu3wI0lhlUo8bi6sp0EEbsMyJDItXQOT5F9Ck7bEFTw6cH3mqhWVeFxe3Vq6vBF2hEcy/VdSey+DoKwzAdbKfw8M3EuXwvUJgPUPgaSphlMxWSomiIhgiBNs06iLagNZPScR5kEK6z4zsdbMdpJxLnUdK+dVyKdEko1J0Lt49GIymUsohXZWGmKLyU4E+MekDZ3fl4PaDHy8P3TjzIPZrjzF9XdtapiKq3mPrVuogHHvUdU5oKpG8l86ynqcW6Ce4qjKVNeWjkOjnW0oTubV02OzETrLFUvyiEc5CqNnXGy23wV98pJ+RkIHkSavQyj04a75PqSqjdG/OXtzvB03oJj6FJ/DB0SZPJtvIkT8/D25dY/5rfBBkyjWQ57VA/7MRJXm/ONj0a9dsQ//ABsD51PE4/6iQHxjvQH0ngD4Hy8HtBj5eH7px5kHs1x7mic1QL9+7vqY9zP+t/kx7mf9b/Jj3M/63+TFGaA1LrIYhJn5sgAuwNhrIv04POqKdWk4ONDD94HuUNNHWSi0lQkKiR+lrXPgi7mlaSMfPTnjtXDcyspM9RvZGBHYzeDqNFMP4Gx5VBL608PRm5eZfTKw/H4LJyVMlPojYsym175pzSLjgcRpHFGoVERbBQNQA3eAL8k0UrfREgvhgJ25KdV3qLqfQSPTjJcdRUqgTlQ7IxUagSpF9e3GRP8AUy/qxkT/AFMv6sZE/wBTL+rGRP8AUy/qxQGmkgqEExErvnRtdfKJ1Nm4N2oqnPQX8iQX+8G9PhgFWBBB2g4ObyOUXonvuYtH+I8HyaGc/wCW2PIyfIT+8g8PmiLLiy9AMit6j8Ogkp6iNopFO1WFjh2V4mJpakrdKiLcd+jQw1g9Rxk2tpqkDnCBRKhPA3B9IxFlT7KP1Yiyp9lH6sRZU+yj9WIsqfZR+rEeUhJVU7JGXpgAH1qTzt4GDYVtIwA3uhDDszvgNHv8Vah6QrHtBxpSRA6ngRfwDb+oyqOlhm/jgaI6EJf6Ug/T4YtyqQ1K9OYB61ONKzxJIOhgD+Pw9HDVUza45Vvp3jaDxGnFXlKkUm+Ysquo6M5Se3GWMp/5f6cZYyn/AJf6cZYyn/l/pxljKf8Al/pxljKf+X+nBdxkyrWRGOgywn80JHThw8MqLJG41MpFwfR4a2SppTEx3sjH8HwwZ1plhf6Scw/d8A2NTJFAOtwT2KcDxpIYVPQGY/eHhrzZ6Z4GO8o1x2Phs544O934GMlPUB8WS8lIORq7DSYiea31WNuhuGJB31RKWpc46XhvpXpUn0EbvDt/SNG5mpgTYObWZL7LjUd4GIZnyY8pFRTEWkgcaCyg7dGldtt+KOlo6QNZGqV5SRhvOkAdGnpxT04p5CF79pgV5Mna63N14jVuOCCCLgg6DhtM07zsvBFzR2vhbNW1Ms994vmD7vhrd8n1KSk7ka6N94ejDc6nnWdAdea4sf4l7fBp6b+qEJPPUIXLPa5Ci4sBcad+IoKevcXp5YrqkxGtbEmzbRsPr7kNLHT0UpheWeMu0rqbNtFhfRv24gWCqikMNRGpuocAG68CCDwxfkKWJpXC6yBsHE6uvGTsmRQk8xHV3YDi2cLnqxR5J/wX/XijyT/gv+vFFklhtHJOL/x4hMLOWSWIm+Y6mxAO0bRwPcU5SykmhoonASM7nffwFz0YNDRJsWODPI62J9WK6lnA8mWkWx/dscUApM4276piXjH0lPOA4i+DFVUNVFbQc5JUYb9oIxLIkSycvk+p15yg6VbeRqI2g8cZsVXGAtVTX0xPw3qdh/EHwpxHCmhVGlpG2Ko2k4yYgqqkiOGngUXzRqLttIGtjq6AMQwV+VZBeWeSMMqfNjB1DjrPZiGGCWppjJUwxKFUHOsrWGgEi/Ta+CTKaNBdtZA0L2AYOctBAlOoG1zzj2sB1YFjTU0cbfSA53bfwwM2rgeLTsJGg9RscExiqL0E4Ox783+NQOvwf21vUMSNHLGwZHQ2KsDcEHeDhkXK1IAtUg0Z42SAbjt3Hq7n94T+0bH7efZpj9m/3DGzGXqVFqYEmCGmYlc5QbXzuOPdDSfZW/Vj3Q0oW+m1K1/vYZ3jiuWkfxpHJuzHpOJTHlGsQtLKp50EWkaNzNpAOwAndhWd2NlVRcknYN5xXR5LVxcQCPlZR9LSAp4XOMuxzygXEVTByYP1lJt6MUE8FSDYKUJD8VI0MOjCPFOWeRYX0NEjMSqkbDttsvhDmtzo5F8aJ9jLx9Y0YcxTLfkZ1BMVVHfSCNo3rrB6jgd7ZRhUGelZrkfOU+UvHZt8CTSebDAh58z+ao9Z1DEZlla4gp0JEVNHtJOwb2Ok+gYtPlCZR3zVsti/zV81Ru6zjMqMsypeOEm6xA6nfhuGs9GnE0zUxkDV1dJ9xfnW0ADQB1XAhoqGnvYakjRdXoGFzhNVtX1F/NU59j15o+BvHHXWrIXHkyA870MAfrYteohBkUeS40MOpgfA/bW9QwnKU1FMkVRmjSgYXDH5txbhcYe00J5yHxZEPjI3A/kdmHvDMNKk86Nh4ytxBx/eE/tGx+3n2aY/Zv8AcMbQcZepkmhpIo5EKvdWCAEat4x7oqb91/04yzS1FSQSsQJVm6AQL9XcYspqWjjvsRDmKPQO3EYdcn5sdOGFxyrAkt0hdX0u6Bo1aO7TLPA+kX8ZG2Mp2Eb8VEiorl6KuQWDjarDVe2grqI4agkGVYFHfNNf+NN6ns1HYThuVqpART0qHnyt+Cjafx0YPKztrY3ENJFfsHDWxwufM9jUVTjnzNvO4DYNnbgxz5adbMfGSmB2tvbcvWeM065P5UtVVshu8z7VQnW286h2Yp0p6WFc1I0Grid5O0nXh7VGVJOTIGsRLpc9fNHXhbNO3esBPmrpc9bWH1fgY86ryYTUJYaTHa0g9Gn6uJObNeppLnyh46jpFm6j4H7a3qGI1lhlliSSNxcMpRgQRgO+S6kl6SU6bDahPnL2ix34ZmyTVsFqk15h1CQcRt3joGHV45K6ZkdTcMC5IIO7H7efZpj9m/3DuU05B0giJtPZimqP8JvyxS1KyRVMcrTcmyrCqsCWLEaNAPTq7l89KmVWvvDnBHKx1iu2/NZAB90+HAJqaUaRqKnYynYw2HFRIqK5eirkXRINqsNV7aCp1jhqpycuD3vvEXzS9vHzvk+3ZxxK0jsQamrkX3unTYAPUo/M4izV8aWVtLyvtZjtPYNmJVkyp4s9QulabgN79g6dGGmjyRnlnlYnlKpr6QpOy+tvRp1QpBTQqEjijFlUDYO5eaJZBQ0KjU3OtndbEnotj+zpYVjzvObym6zc9fwKhlIsQRcEYuiRSiroHOoxk+KejSp4dOD7zUxhs2+lG1Mp4g3Hd/bW9Qx+0Q/cOBZZBnRygXaJx4rjiO0XGI8yogaxtqcbGXeCNI7n7efZpj9m/wBwxuOP2GD2Y8BCKTKV6qJraM4+OvSG0/WGFaSgqFENWi6Tm3uGA2lTp4gkYqoqmmkF1kia4P5HgdOCAqi5JNgBiCbKhQ2llp3URqdwY+MejRxw7NBLcZrizIwNirDYR4FJHVtUsIaaFzb303IcHWM0Am43W24JgoIWHfNWV0JwUbWO7ZrPGnWGnjHSzttZjtY78Tg1AulTXRm4j3pGfO3ts2adSPHkm+dHEbhqvjvCcdbbN+I0jijUKiItgoGoAbB3JM3KOUQYIbHSi2579QNhxIxH7xR3hpQRoaUjnMPoqbdLcPg487KdDeamtrceVH1gaOIGJM2gr3vCXNhFPqHQGtbpA3nuqVJqywBGwqCD6MKQjVMahthITSO0enuIoyxRqTAdXLLrMZPHWNx6ThWV1JVlYWII1gjfhCEkr2zCdtkQHtwhZu9GawGwEE9gxuOFKyJRQqynWCEFx4HvcinPp6hRdoX2EbxsI2jFMY7n3qddMUo3q34axuxX1VHIdbU8zIT02OnGWK+rj8yaoZl9F7YpJaqpc2WOJbnpOwDidGJVkqnkaecp4odrc0bwAAL7dPgAmCCqZZLbCy80n0EdeK6noKuKeSRuXYIJQxuGBOgkara9GJytKwK1Fet1Mg2rHtA3tt2bzAVotD01E4sZtzONi7ht26NYAUCwAFgB3JVip4UMkkjHQqgXJwjXqJBBRxHVFECTc9V2bA94powoJGlzrLHiTc/CRWyfWyXmVBYQzHT1BtY433jEt8sUSASEnTPHqEg47Dx07e5QCSpQBRNG7RuV3EqdI6cUsdNSx+LGg27STrJO893JSPVObySRyNHyn0gpAJ468U8dPTQrmxxRrZVGFDKwsQRcEYyOglVs9I2dmiVtdwhNurV4VNFUQPoaOVAynqOKGekJ1imqGVfQbgYgragDyZqprH922Mn09HEdYhQDO6TrPX4MKzUs65kiNtH4EawdmMs07UxN1WsRldRuuoIPTYYq0ylURENHAsdoVYaib6W67DgfAmvTQteukU6Hcao+hdZ46NmIs3KNcg5JHGmGE6R0M2gnhYb/AIWES0tQhSRDtB9R2g78TMDGxloqq3Nmj1EMOxh+YwQky2SppybtC+7iDrB2jr+Nyj+mKhNLqb97IfK+kdg6914i2S6aS8aPp75lB7VB0nedG/4dc1vGgnUc6F9jD8RtGFzJ4tEkZJ5KqhJ7Qdh1g9eJNHiywsefC+1WH46j8ZKT5amW8UR0iEHy3/AbejEsxoFlz62sY86VjpKKfOO/yR1DEKQ08KBI40FgqjUB8QHJ1Ed2p6lRdom/FTtG3pwORnXWDcw1cV+0dqndhuSrIwO+KR258Z3/ADl3MOw/F2jqcs2KufGjpuLb2+b6dxnnWgMparrpNLSttVL6246l9AxAkFLCuakajV+ZOsnb8Shzl1xyroeJvOU7D2HbieUQq/8AVso04sD81h5J3qdB44MVDlI2VZr2hnPSfEbgdG47Pik8cFPEuc8srBVUbyTh3gpjdZMoEZruP/rHkj5x07rYEtLksnPWI3EtT+Kqd+s7N+II4KaFQkcUa2VQNgHxSGOenlXNkikUMrDcQcXng0s2T3a7r/8Amx8YfNOnicJJW0MLZjUtSSssPBWOkfROjoxWDvkC70svMlT6u0cRcfEXGUsorcchAwzEPz31DoFzhJak3zoqKmFoYh5x2fWY4MdflFbMkVrwwnoPjtxOjcNvximzKsLZKuHmyr1+UOBvjPylSxnOSekBWaPiUGm/FSerCjKtOhzW5Y5k68M/afpDrxXCgqm0chW2j08G8U+nDBlIuCDcH4OphpoV1yTSBFHWcLJlaoGgGLmRA8XOvqBw8yxS6FoMnI3OHziOc3Xo4Yn7xg196QENKw3M2peq56MUUVLBrIQaWO9idLHifjeTozUEaKmH3uUfWGvrvjKcVVHrEFWOTfozhzT1gYXK2TY1OtLvAfRdDikocoINbAGJz1rcdmMl19I2+PNlX1g9mMtLAx8mohdO0i2PdHks9NUg9ZxlrJpHCrj/ADxlzJi9NXH+ePdHk3R5k4f1XxlGaqI2U9M5v1kAYyFVTHY9TKsY9C5xxLTZPVtAWliznP1mufQMUlfMG0985SkKKOIz9PoGMqPUMNJp6QZidbnSeoDGT4KSPbyac5vpNrPWfj+o7MZDopHOuRI+Tf8AeWxxU5Ro2OoLKJFHUwJ7ce6NG3Celt2q34YylkqUbM5pFv8AwnH9FNx74P6MPkpOmdj6kxlfJkQ+YJH/AAGPdFK29YKYL2sT6sQ1lcw198VBAPUlsZJo6UjyooQG/e19v/pb/8QAFBEBAAAAAAAAAAAAAAAAAAAAgP/aAAgBAgEBPwByf//EABQRAQAAAAAAAAAAAAAAAAAAAID/2gAIAQMBAT8Acn//2Q==" alt="Official NFC Contactless Logo" class="nfc-uploaded-logo" id="nfcLogoImg" />
+      </div>
+      <div class="nfc-text-col">
+        <div class="nfc-title">
+          <span>📲</span>
+          <span>TAP HERE TO RATE US</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Speed Callout: No Typing Needed -->
+    <div class="speed-callout-pill">
+      <span>⚡ No Typing Needed &bull; Done in Just 2 Seconds!</span>
+    </div>
+
+    <!-- 6. Footer Verification -->
+    <footer class="standee-footer">
+      <div class="footer-left">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="#4285F4"><circle cx="12" cy="12" r="10"/></svg>
+        <span>Verified Google Reviews Stand</span>
+      </div>
+      <div>Camera QR &bull; NFC Contactless Touch</div>
+    </footer>
+
+  </main>
+
+  <script>
+/**
+ * Standalone QR Code Generator in pure JavaScript (Zero External Dependencies)
+ * Supports alphanumeric/byte encoding, error correction L/M/Q/H, and direct SVG / Canvas output.
+ */
+(function(root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    define([], factory);
+  } else if (typeof exports === 'object') {
+    module.exports = factory();
+  } else {
+    root.QRCode = factory();
+  }
+}(typeof self !== 'undefined' ? self : this, function() {
+
+  // Reed-Solomon & QR Math tables
+  const QRMath = {
+    glog: function(n) {
+      if (n < 1) throw new Error("glog(" + n + ")");
+      return QRMath.LOG_TABLE[n];
+    },
+    gexp: function(n) {
+      while (n < 0) n += 255;
+      while (n >= 256) n -= 255;
+      return QRMath.EXP_TABLE[n];
+    },
+    EXP_TABLE: new Array(256),
+    LOG_TABLE: new Array(256)
+  };
+
+  for (let i = 0; i < 8; i++) QRMath.EXP_TABLE[i] = 1 << i;
+  for (let i = 8; i < 256; i++) QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4] ^ QRMath.EXP_TABLE[i - 5] ^ QRMath.EXP_TABLE[i - 6] ^ QRMath.EXP_TABLE[i - 8];
+  for (let i = 0; i < 255; i++) QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]] = i;
+
+  function QRPolynomial(num, shift) {
+    if (num.length == undefined) throw new Error(num.length + "/" + shift);
+    let offset = 0;
+    while (offset < num.length && num[offset] == 0) offset++;
+    this.num = new Array(num.length - offset + shift);
+    for (let i = 0; i < num.length - offset; i++) this.num[i] = num[i + offset];
+  }
+
+  QRPolynomial.prototype = {
+    get: function(index) { return this.num[index]; },
+    getLength: function() { return this.num.length; },
+    multiply: function(e) {
+      const num = new Array(this.getLength() + e.getLength() - 1);
+      for (let i = 0; i < this.getLength(); i++) {
+        for (let j = 0; j < e.getLength(); j++) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i)) + QRMath.glog(e.get(j)));
+        }
+      }
+      return new QRPolynomial(num, 0);
+    },
+    mod: function(e) {
+      if (this.getLength() - e.getLength() < 0) return this;
+      const ratio = QRMath.glog(this.get(0)) - QRMath.glog(e.get(0));
+      const num = new Array(this.getLength());
+      for (let i = 0; i < this.getLength(); i++) num[i] = this.get(i);
+      for (let i = 0; i < e.getLength(); i++) num[i] ^= QRMath.gexp(QRMath.glog(e.get(i)) + ratio);
+      return new QRPolynomial(num, 0).mod(e);
+    }
+  };
+
+  function QRRSBlock(totalCount, dataCount) {
+    this.totalCount = totalCount;
+    this.dataCount = dataCount;
+  }
+
+  QRRSBlock.RS_BLOCK_TABLE = [
+    // 1-40 Versions with L, M, Q, H
+    [1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9],
+    [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16],
+    [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13],
+    [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9],
+    [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12],
+    [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15],
+    [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14],
+    [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15],
+    [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13],
+    [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16]
+  ];
+
+  QRRSBlock.getRSBlocks = function(typeNumber, errorCorrectLevel) {
+    const rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+    if (rsBlock == undefined) throw new Error("bad rs block @ typeNumber:" + typeNumber);
+    const length = rsBlock.length / 3;
+    const list = [];
+    for (let i = 0; i < length; i++) {
+      const count = rsBlock[i * 3 + 0];
+      const totalCount = rsBlock[i * 3 + 1];
+      const dataCount = rsBlock[i * 3 + 2];
+      for (let j = 0; j < count; j++) list.push(new QRRSBlock(totalCount, dataCount));
+    }
+    return list;
+  };
+
+  QRRSBlock.getRsBlockTable = function(typeNumber, errorCorrectLevel) {
+    switch (errorCorrectLevel) {
+      case 1: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+      case 0: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+      case 3: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+      case 2: return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+      default: return undefined;
+    }
+  };
+
+  function QRBitBuffer() {
+    this.buffer = [];
+    this.length = 0;
+  }
+
+  QRBitBuffer.prototype = {
+    get: function(index) {
+      const bufIndex = Math.floor(index / 8);
+      return ((this.buffer[bufIndex] >>> (7 - index % 8)) & 1) == 1;
+    },
+    put: function(num, length) {
+      for (let i = 0; i < length; i++) this.putBit(((num >>> (length - i - 1)) & 1) == 1);
+    },
+    putBit: function(bit) {
+      const bufIndex = Math.floor(this.length / 8);
+      if (this.buffer.length <= bufIndex) this.buffer.push(0);
+      if (bit) this.buffer[bufIndex] |= (0x80 >>> (this.length % 8));
+      this.length++;
+    }
+  };
+
+  function QRCodeModel(typeNumber, errorCorrectLevel) {
+    this.typeNumber = typeNumber;
+    this.errorCorrectLevel = errorCorrectLevel;
+    this.modules = null;
+    this.moduleCount = 0;
+    this.dataCache = null;
+    this.dataList = [];
+  }
+
+  QRCodeModel.prototype = {
+    addData: function(data) {
+      this.dataList.push(data);
+      this.dataCache = null;
+    },
+    isDark: function(row, col) {
+      if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+        throw new Error(row + "," + col);
+      }
+      return this.modules[row][col];
+    },
+    getModuleCount: function() { return this.moduleCount; },
+    make: function() {
+      if (this.typeNumber < 1) {
+        let typeNumber = 1;
+        for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+          const rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+          const buffer = new QRBitBuffer();
+          let totalDataCount = 0;
+          for (let i = 0; i < rsBlocks.length; i++) totalDataCount += rsBlocks[i].dataCount;
+          for (let i = 0; i < this.dataList.length; i++) {
+            const data = this.dataList[i];
+            buffer.put(4, 4); // 8-bit byte mode
+            buffer.put(data.length, typeNumber < 10 ? 8 : 16);
+            for (let j = 0; j < data.length; j++) buffer.put(data.charCodeAt(j), 8);
+          }
+          if (buffer.length <= totalDataCount * 8) break;
+        }
+        this.typeNumber = typeNumber;
+      }
+      this.makeImpl(false, this.getBestMaskPattern());
+    },
+    makeImpl: function(test, maskPattern) {
+      this.moduleCount = this.typeNumber * 4 + 17;
+      this.modules = new Array(this.moduleCount);
+      for (let row = 0; row < this.moduleCount; row++) {
+        this.modules[row] = new Array(this.moduleCount);
+        for (let col = 0; col < this.moduleCount; col++) this.modules[row][col] = null;
+      }
+      this.setupPositionProbePattern(0, 0);
+      this.setupPositionProbePattern(this.moduleCount - 7, 0);
+      this.setupPositionProbePattern(0, this.moduleCount - 7);
+      this.setupTimingPattern();
+      this.setupPositionAdjustPattern();
+      if (this.typeNumber >= 7) this.setupTypeNumber(test);
+      if (this.dataCache == null) this.dataCache = QRCodeModel.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+      this.mapData(this.dataCache, maskPattern);
+    },
+    setupPositionProbePattern: function(row, col) {
+      for (let r = -1; r <= 7; r++) {
+        if (row + r <= -1 || this.moduleCount <= row + r) continue;
+        for (let c = -1; c <= 7; c++) {
+          if (col + c <= -1 || this.moduleCount <= col + c) continue;
+          if ((0 <= r && r <= 6 && (c == 0 || c == 6)) || (0 <= c && c <= 6 && (r == 0 || r == 6)) || (2 <= r && r <= 4 && 2 <= c && c <= 4)) {
+            this.modules[row + r][col + c] = true;
+          } else {
+            this.modules[row + r][col + c] = false;
+          }
+        }
+      }
+    },
+    getBestMaskPattern: function() {
+      let minLostPoint = 0;
+      let pattern = 0;
+      for (let i = 0; i < 8; i++) {
+        this.makeImpl(true, i);
+        const lostPoint = QRUtil.getLostPoint(this);
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+        }
+      }
+      return pattern;
+    },
+    setupTimingPattern: function() {
+      for (let r = 8; r < this.moduleCount - 8; r++) {
+        if (this.modules[r][6] != null) continue;
+        this.modules[r][6] = (r % 2 == 0);
+      }
+      for (let c = 8; c < this.moduleCount - 8; c++) {
+        if (this.modules[6][c] != null) continue;
+        this.modules[6][c] = (c % 2 == 0);
+      }
+    },
+    setupPositionAdjustPattern: function() {
+      const pos = QRUtil.getPatternPosition(this.typeNumber);
+      for (let i = 0; i < pos.length; i++) {
+        for (let j = 0; j < pos.length; j++) {
+          const row = pos[i];
+          const col = pos[j];
+          if (this.modules[row][col] != null) continue;
+          for (let r = -2; r <= 2; r++) {
+            for (let c = -2; c <= 2; c++) {
+              if (r == -2 || r == 2 || c == -2 || c == 2 || (r == 0 && c == 0)) {
+                this.modules[row + r][col + c] = true;
+              } else {
+                this.modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    },
+    setupTypeNumber: function(test) {
+      const bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+      for (let i = 0; i < 18; i++) {
+        const mod = (!test && ((bits >> i) & 1) == 1);
+        this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+        this.modules[i % 3 + this.moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    },
+    mapData: function(data, maskPattern) {
+      let inc = -1;
+      let row = this.moduleCount - 1;
+      let bitIndex = 7;
+      let byteIndex = 0;
+      for (let col = this.moduleCount - 1; col > 0; col -= 2) {
+        if (col == 6) col--;
+        while (true) {
+          for (let c = 0; c < 2; c++) {
+            if (this.modules[row][col - c] == null) {
+              let dark = false;
+              if (byteIndex < data.length) dark = (((data[byteIndex] >>> bitIndex) & 1) == 1);
+              const mask = QRUtil.getMask(maskPattern, row, col - c);
+              if (mask) dark = !dark;
+              this.modules[row][col - c] = dark;
+              bitIndex--;
+              if (bitIndex == -1) {
+                byteIndex++;
+                bitIndex = 7;
+              }
+            }
+          }
+          row += inc;
+          if (row < 0 || this.moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    }
+  };
+
+  QRCodeModel.createData = function(typeNumber, errorCorrectLevel, dataList) {
+    const rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+    const buffer = new QRBitBuffer();
+    for (let i = 0; i < dataList.length; i++) {
+      const data = dataList[i];
+      buffer.put(4, 4); // byte mode
+      buffer.put(data.length, typeNumber < 10 ? 8 : 16);
+      for (let j = 0; j < data.length; j++) buffer.put(data.charCodeAt(j), 8);
+    }
+    let totalDataCount = 0;
+    for (let i = 0; i < rsBlocks.length; i++) totalDataCount += rsBlocks[i].dataCount;
+    if (buffer.length + 4 <= totalDataCount * 8) buffer.put(0, 4);
+    while (buffer.length % 8 != 0) buffer.putBit(false);
+    while (true) {
+      if (buffer.length >= totalDataCount * 8) break;
+      buffer.put(0xEC, 8);
+      if (buffer.length >= totalDataCount * 8) break;
+      buffer.put(0x11, 8);
+    }
+    return QRCodeModel.createBytes(buffer, rsBlocks);
+  };
+
+  QRCodeModel.createBytes = function(buffer, rsBlocks) {
+    let offset = 0;
+    let maxDcCount = 0;
+    let maxEcCount = 0;
+    const dcdata = new Array(rsBlocks.length);
+    const ecdata = new Array(rsBlocks.length);
+    for (let r = 0; r < rsBlocks.length; r++) {
+      const dcCount = rsBlocks[r].dataCount;
+      const ecCount = rsBlocks[r].totalCount - dcCount;
+      maxDcCount = Math.max(maxDcCount, dcCount);
+      maxEcCount = Math.max(maxEcCount, ecCount);
+      dcdata[r] = new Array(dcCount);
+      for (let i = 0; i < dcdata[r].length; i++) dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+      offset += dcCount;
+      const rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+      const rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+      const modPoly = rawPoly.mod(rsPoly);
+      ecdata[r] = new Array(rsPoly.getLength() - 1);
+      for (let i = 0; i < ecdata[r].length; i++) {
+        const modIndex = i + modPoly.getLength() - ecdata[r].length;
+        ecdata[r][i] = (modIndex >= 0) ? modPoly.get(modIndex) : 0;
+      }
+    }
+    let totalCodeCount = 0;
+    for (let i = 0; i < rsBlocks.length; i++) totalCodeCount += rsBlocks[i].totalCount;
+    const data = new Array(totalCodeCount);
+    let index = 0;
+    for (let i = 0; i < maxDcCount; i++) {
+      for (let r = 0; r < rsBlocks.length; r++) {
+        if (i < dcdata[r].length) data[index++] = dcdata[r][i];
+      }
+    }
+    for (let i = 0; i < maxEcCount; i++) {
+      for (let r = 0; r < rsBlocks.length; r++) {
+        if (i < ecdata[r].length) data[index++] = ecdata[r][i];
+      }
+    }
+    return data;
+  };
+
+  const QRUtil = {
+    PATTERN_POSITION_TABLE: [
+      [], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54]
+    ],
+    getPatternPosition: function(typeNumber) { return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1] || []; },
+    getMask: function(maskPattern, i, j) {
+      switch (maskPattern) {
+        case 0: return (i + j) % 2 == 0;
+        case 1: return i % 2 == 0;
+        case 2: return j % 3 == 0;
+        case 3: return (i + j) % 3 == 0;
+        case 4: return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 == 0;
+        case 5: return (i * j) % 2 + (i * j) % 3 == 0;
+        case 6: return ((i * j) % 2 + (i * j) % 3) % 2 == 0;
+        case 7: return ((i * j) % 3 + (i + j) % 2) % 2 == 0;
+        default: throw new Error("bad maskPattern:" + maskPattern);
+      }
+    },
+    getErrorCorrectPolynomial: function(errorCorrectLength) {
+      let a = new QRPolynomial([1], 0);
+      for (let i = 0; i < errorCorrectLength; i++) a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0));
+      return a;
+    },
+    getBCHTypeNumber: function(data) {
+      let d = data << 12;
+      while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(7973) >= 0) {
+        d ^= (7973 << (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(7973)));
+      }
+      return (data << 12) | d;
+    },
+    getBCHDigit: function(data) {
+      let digit = 0;
+      while (data != 0) { digit++; data >>>= 1; }
+      return digit;
+    },
+    getLostPoint: function(qrCode) {
+      const moduleCount = qrCode.getModuleCount();
+      let lostPoint = 0;
+      for (let row = 0; row < moduleCount; row++) {
+        for (let col = 0; col < moduleCount; col++) {
+          let sameCount = 0;
+          const dark = qrCode.isDark(row, col);
+          for (let r = -1; r <= 1; r++) {
+            if (row + r < 0 || moduleCount <= row + r) continue;
+            for (let c = -1; c <= 1; c++) {
+              if (col + c < 0 || moduleCount <= col + c) continue;
+              if (r == 0 && c == 0) continue;
+              if (dark == qrCode.isDark(row + r, col + c)) sameCount++;
+            }
+          }
+          if (sameCount > 5) lostPoint += (3 + sameCount - 5);
+        }
+      }
+      return lostPoint;
+    }
+  };
+
+  /**
+   * Main QRCode class for DOM / Canvas / SVG rendering
+   */
+  function QRCode(target, options) {
+    if (typeof options === "string") {
+      options = { text: options };
+    }
+    this.options = Object.assign({
+      width: 256,
+      height: 256,
+      typeNumber: 4,
+      colorDark: "#000000",
+      colorLight: "#ffffff",
+      correctLevel: 0 // M
+    }, options);
+
+    this.target = typeof target === "string" ? document.getElementById(target) : target;
+    if (this.options.text) {
+      this.makeCode(this.options.text);
+    }
+  }
+
+  QRCode.prototype.makeCode = function(text) {
+    const qr = new QRCodeModel(0, this.options.correctLevel);
+    qr.addData(text);
+    qr.make();
+    this.render(qr);
+  };
+
+  QRCode.prototype.render = function(qr) {
+    if (!this.target) return;
+    this.target.innerHTML = '';
+    const moduleCount = qr.getModuleCount();
+    const size = this.options.width;
+    const cellSize = size / moduleCount;
+
+    // Create Canvas
+    const canvas = document.createElement('canvas');
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = this.options.colorLight;
+    ctx.fillRect(0, 0, size, size);
+    ctx.fillStyle = this.options.colorDark;
+
+    for (let row = 0; row < moduleCount; row++) {
+      for (let col = 0; col < moduleCount; col++) {
+        if (qr.isDark(row, col)) {
+          ctx.fillRect(Math.round(col * cellSize), Math.round(row * cellSize), Math.ceil(cellSize), Math.ceil(cellSize));
+        }
+      }
+    }
+    this.target.appendChild(canvas);
+    this.canvas = canvas;
+    this.qrModel = qr;
+  };
+
+  QRCode.prototype.getSvgString = function() {
+    if (!this.qrModel) return '';
+    const qr = this.qrModel;
+    const moduleCount = qr.getModuleCount();
+    const size = this.options.width;
+    const cellSize = (size / moduleCount).toFixed(3);
+
+    let rects = '';
+    for (let row = 0; row < moduleCount; row++) {
+      for (let col = 0; col < moduleCount; col++) {
+        if (qr.isDark(row, col)) {
+          rects += `<rect x="${(col * cellSize)}" y="${(row * cellSize)}" width="${cellSize}" height="${cellSize}" fill="${this.options.colorDark}" />`;
+        }
+      }
+    }
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
+      <rect width="100%" height="100%" fill="${this.options.colorLight}"/>
+      ${rects}
+    </svg>`;
+  };
+
+  return QRCode;
+}));
+
+</script>
+  <script>
+    (function() {
+      // Read params
+      const params = new URLSearchParams(window.location.search);
+      const name = params.get('name') || 'The Olive & Oak Bistro';
+      const category = params.get('category') || 'restaurant';
+      const color = params.get('color') || '#1a73e8';
+      const biz = params.get('biz') || 'demo-restaurant';
+
+      document.getElementById('standeeBizName').textContent = name;
+
+      // Target URL
+      const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/')) + '/index.html';
+      const targetUrl = `${baseUrl}?biz=${encodeURIComponent(biz)}&name=${encodeURIComponent(name)}&category=${encodeURIComponent(category)}&color=${encodeURIComponent(color)}`;
+
+      // Render High-Density QR
+      const qrContainer = document.getElementById('standeeQr');
+      const qr = new QRCode(qrContainer, {
+        text: targetUrl,
+        width: 96,
+        height: 96,
+        colorDark: "#0f172a",
+        colorLight: "#ffffff"
+      });
+
+      // Preload user's NFC logo for 300 DPI Canvas downloads
+      const nfcImg = new Image();
+      nfcImg.src = "data:image/jpeg;base64,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";
+
+      // Themes State
+      const standeeBox = document.getElementById('standeeBox');
+      const tabs = document.querySelectorAll('.tab-btn');
+      let currentTheme = 'classic';
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabs.forEach(t => t.classList.remove('active'));
+          tab.classList.add('active');
+          const theme = tab.getAttribute('data-theme');
+          currentTheme = theme;
+          standeeBox.className = `standee-container theme-${theme}`;
+        });
+      });
+
+      // High-Resolution 300 DPI Canvas Generator (1240 x 1795 px)
+      // Symmetrical Enlarged 430px x 430px boxes for BOTH QR and NFC Logo
+      function generateCanvasForTheme(theme) {
+        const canvas = document.createElement('canvas');
+        canvas.width = 1240;
+        canvas.height = 1795;
+        const ctx = canvas.getContext('2d');
+
+        let bgFill, textMain, textSub, primaryCol, starCol, cardBg, cardBorder, nfcCardBg, nfcCardBorder, nfcTitleCol, pillBg, pillBorder, pillText, stripeColors;
+
+        if (theme === 'gold') {
+          // 24K Royal Obsidian & Champagne Gold
+          bgFill = '#080808';
+          textMain = '#f5d77f';
+          textSub = '#d4cfc5';
+          primaryCol = '#ffffff';
+          starCol = '#f5d77f';
+          cardBg = '#14120d';
+          cardBorder = '#8c6d2d';
+          nfcCardBg = '#16140e';
+          nfcCardBorder = '#c5a059';
+          nfcTitleCol = '#f5d77f';
+          pillBg = '#221a0f';
+          pillBorder = '#8c6d2d';
+          pillText = '#f5d77f';
+          stripeColors = ['#8c6d2d', '#f5d77f', '#c5a059', '#8c6d2d'];
+        } else if (theme === 'platinum') {
+          // Executive Emerald & Platinum Chrome
+          bgFill = '#03110d';
+          textMain = '#ffffff';
+          textSub = '#cbd5e1';
+          primaryCol = '#a7f3d0';
+          starCol = '#34d399';
+          cardBg = '#052018';
+          cardBorder = '#059669';
+          nfcCardBg = '#07271e';
+          nfcCardBorder = '#34d399';
+          nfcTitleCol = '#6ee7b7';
+          pillBg = '#064e3b';
+          pillBorder = '#059669';
+          pillText = '#a7f3d0';
+          stripeColors = ['#059669', '#34d399', '#a7f3d0', '#059669'];
+        } else {
+          // Google Classic Official White
+          bgFill = '#ffffff';
+          textMain = '#202124';
+          textSub = '#5f6368';
+          primaryCol = '#1a73e8';
+          starCol = '#fbbc04';
+          cardBg = '#f8fafc';
+          cardBorder = '#e2e8f0';
+          nfcCardBg = '#eff6ff';
+          nfcCardBorder = '#3b82f6';
+          nfcTitleCol = '#1e3a8a';
+          pillBg = '#f0fdf4';
+          pillBorder = '#bbf7d0';
+          pillText = '#15803d';
+          stripeColors = ['#4285F4', '#EA4335', '#FBBC05', '#34A853'];
+        }
+
+        // 1. Background
+        ctx.fillStyle = bgFill;
+        ctx.fillRect(0, 0, 1240, 1795);
+
+        // Luxury Dual Hairline Gold/Platinum Border
+        if (theme === 'gold') {
+          ctx.strokeStyle = '#c5a059';
+          ctx.lineWidth = 6;
+          roundRect(ctx, 16, 16, 1208, 1763, 28);
+          ctx.stroke();
+
+          ctx.strokeStyle = 'rgba(197, 160, 89, 0.4)';
+          ctx.lineWidth = 2;
+          roundRect(ctx, 28, 28, 1184, 1739, 22);
+          ctx.stroke();
+        } else if (theme === 'platinum') {
+          ctx.strokeStyle = '#34d399';
+          ctx.lineWidth = 6;
+          roundRect(ctx, 16, 16, 1208, 1763, 28);
+          ctx.stroke();
+
+          ctx.strokeStyle = 'rgba(52, 211, 153, 0.4)';
+          ctx.lineWidth = 2;
+          roundRect(ctx, 28, 28, 1184, 1739, 22);
+          ctx.stroke();
+        }
+
+        // 2. Top Accent Stripe
+        const stripeH = 34;
+        const stripeW = 1240 / 4;
+        for (let i = 0; i < 4; i++) {
+          ctx.fillStyle = stripeColors[i];
+          ctx.fillRect(i * stripeW, 0, stripeW, stripeH);
+        }
+
+        // 3. Header: "Review us on Google"
+        ctx.fillStyle = textMain;
+        ctx.font = 'bold 82px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('Review us on Google', 620, 155);
+
+        // 4. Stars
+        ctx.fillStyle = starCol;
+        ctx.font = 'bold 74px sans-serif';
+        ctx.fillText('★ ★ ★ ★ ★', 620, 248);
+
+        // 5. Business Name
+        ctx.fillStyle = primaryCol;
+        ctx.font = 'bold 64px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillText(name, 620, 340);
+
+        // =========================================================================
+        // 6. UPPER ZONE: PROMINENT ENLARGED QR CODE BOX
+        // =========================================================================
+        ctx.fillStyle = cardBg;
+        ctx.strokeStyle = cardBorder;
+        ctx.lineWidth = 4;
+        roundRect(ctx, 65, 380, 1110, 510, 36);
+        ctx.fill();
+        ctx.stroke();
+
+        // Exact square frame for QR code: 430 x 430 px
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = cardBorder;
+        ctx.lineWidth = 3;
+        roundRect(ctx, 105, 420, 430, 430, 26);
+        ctx.fill();
+        ctx.stroke();
+
+        const qrCanvas = qrContainer.querySelector('canvas');
+        if (qrCanvas) {
+          ctx.drawImage(qrCanvas, 125, 440, 390, 390);
+        }
+
+        // QR Text Side: SAME SINGLE LINE, SAME TEXT & SIZE
+        ctx.textAlign = 'left';
+        ctx.fillStyle = textMain;
+        ctx.font = 'bold 38px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillText('📷 SCAN QR CODE TO RATE US', 570, 645);
+
+        // =========================================================================
+        // 7. OR DIVIDER BAR
+        // =========================================================================
+        ctx.strokeStyle = textSub;
+        ctx.globalAlpha = 0.25;
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(65, 945);
+        ctx.lineTo(1175, 945);
+        ctx.stroke();
+        ctx.globalAlpha = 1.0;
+
+        ctx.fillStyle = cardBg;
+        roundRect(ctx, 550, 905, 140, 80, 20);
+        ctx.fill();
+        ctx.fillStyle = textSub;
+        ctx.font = 'bold 38px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('OR', 620, 957);
+
+        // =========================================================================
+        // 8. LOWER ZONE: NFC CARD (IDENTICAL 430 x 430 px SIZE AS QR CODE)
+        // =========================================================================
+        ctx.fillStyle = nfcCardBg;
+        ctx.strokeStyle = nfcCardBorder;
+        ctx.lineWidth = 6;
+        ctx.setLineDash([16, 12]);
+        roundRect(ctx, 65, 1000, 1110, 510, 36);
+        ctx.fill();
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Exact square frame for NFC logo: 430 x 430 px (Matching QR Code!)
+        ctx.fillStyle = '#ffffff';
+        ctx.strokeStyle = cardBorder;
+        ctx.lineWidth = 3;
+        roundRect(ctx, 105, 1040, 430, 430, 26);
+        ctx.fill();
+        ctx.stroke();
+
+        // Draw User's exact NFC logo
+        if (nfcImg.complete) {
+          ctx.drawImage(nfcImg, 125, 1060, 390, 390);
+        }
+
+        // NFC Text Side: SAME SINGLE LINE, SAME TEXT & SIZE
+        ctx.textAlign = 'left';
+        ctx.fillStyle = nfcTitleCol;
+        ctx.font = 'bold 38px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillText('📲 TAP HERE TO RATE US', 570, 1265);
+
+        // =========================================================================
+        // 9. HIGH-IMPACT SPEED CALLOUT
+        // =========================================================================
+        ctx.fillStyle = pillBg;
+        ctx.strokeStyle = pillBorder;
+        ctx.lineWidth = 3;
+        roundRect(ctx, 65, 1550, 1110, 130, 36);
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.fillStyle = pillText;
+        ctx.textAlign = 'center';
+        ctx.font = 'bold 44px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.fillText('⚡ No Typing Needed • Done in Just 2 Seconds!', 620, 1632);
+
+        // =========================================================================
+        // 10. FOOTER ATTRIBUTION
+        // =========================================================================
+        ctx.fillStyle = textSub;
+        ctx.font = 'bold 32px -apple-system, BlinkMacSystemFont, sans-serif';
+        ctx.textAlign = 'left';
+        ctx.fillText('Verified Google Reviews Stand', 80, 1740);
+        ctx.textAlign = 'right';
+        ctx.fillText('Camera QR • NFC Contactless Touch', 1160, 1740);
+
+        return canvas;
+      }
+
+      function triggerDownload(canvas, filename) {
+        const a = document.createElement('a');
+        a.download = filename;
+        a.href = canvas.toDataURL('image/png');
+        a.click();
+      }
+
+      function roundRect(ctx, x, y, width, height, radius) {
+        ctx.beginPath();
+        ctx.moveTo(x + radius, y);
+        ctx.lineTo(x + width - radius, y);
+        ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+        ctx.lineTo(x + width, y + height - radius);
+        ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+        ctx.lineTo(x + radius, y + height);
+        ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+        ctx.lineTo(x, y + radius);
+        ctx.quadraticCurveTo(x, y, x + radius, y);
+        ctx.closePath();
+      }
+
+      // Download Active Single Standee
+      document.getElementById('btnDownloadSingle').addEventListener('click', () => {
+        const canvas = generateCanvasForTheme(currentTheme);
+        const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        triggerDownload(canvas, `Standee_${currentTheme.toUpperCase()}_${slug}_4x6.png`);
+      });
+
+      // Download All 3 Editions (1-Click Package)
+      document.getElementById('btnDownloadAll').addEventListener('click', () => {
+        const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+        const themes = ['classic', 'gold', 'platinum'];
+        themes.forEach((t, index) => {
+          setTimeout(() => {
+            const canvas = generateCanvasForTheme(t);
+            triggerDownload(canvas, `Standee_${(index + 1)}_${t.toUpperCase()}_${slug}_4x6.png`);
+          }, index * 400);
+        });
+      });
+
+    })();
+  </script>
+</body>
+</html>

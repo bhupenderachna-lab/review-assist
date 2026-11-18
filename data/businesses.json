@@ -1,0 +1,24 @@
+{
+  "demo-restaurant": {
+    "id": "demo-restaurant",
+    "name": "The Olive & Oak Bistro",
+    "address": "142 Elmwood Boulevard, Downtown",
+    "category": "restaurant",
+    "googleReviewUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+    "brandColor": "#2563eb",
+    "logoText": "OO",
+    "invitationHeading": "Share your dining experience",
+    "invitationSubtext": "Your honest thoughts help others discover good food and help our team continue doing our best."
+  },
+  "demo-hotel": {
+    "id": "demo-hotel",
+    "name": "The Grand Horizon Hotel & Suites",
+    "address": "880 Marina Bay Avenue, Waterfront",
+    "category": "hotel",
+    "googleReviewUrl": "https://search.google.com/local/writereview?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4",
+    "brandColor": "#0d9488",
+    "logoText": "GH",
+    "invitationHeading": "Share your stay experience",
+    "invitationSubtext": "Your honest feedback helps fellow travelers and supports our hospitality team."
+  }
+}
