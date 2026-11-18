@@ -779,7 +779,8 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
       // Render QR using GoQR API (free, reliable, guaranteed scannable)
       const qrContainer = document.getElementById('standeeQr');
       qrContainer.innerHTML = '';
-      const qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&ecc=M&data=' + encodeURIComponent(targetUrl);
+      window._qrApiUrl = 'https://api.qrserver.com/v1/create-qr-code/?size=400x400&ecc=M&data=' + encodeURIComponent(targetUrl);
+      const qrApiUrl = window._qrApiUrl;
       const qrImg = document.createElement('img');
       qrImg.src = qrApiUrl;
       qrImg.alt = 'Scan to Review';
@@ -1046,22 +1047,51 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
       }
 
       // Download Active Single Standee
-      document.getElementById('btnDownloadSingle').addEventListener('click', () => {
+      document.getElementById('btnDownloadSingle').addEventListener('click', async () => {
         const canvas = generateCanvasForTheme(currentTheme);
+        const ctx2 = canvas.getContext('2d');
+        try {
+          const qrUrl = window._qrApiUrl || '';
+          if (qrUrl) {
+            const resp = await fetch(qrUrl);
+            const blob = await resp.blob();
+            const blobUrl = URL.createObjectURL(blob);
+            const qrImg2 = new Image();
+            await new Promise((res, rej) => { qrImg2.onload = res; qrImg2.onerror = rej; qrImg2.src = blobUrl; });
+            ctx2.drawImage(qrImg2, 125, 440, 390, 390);
+            URL.revokeObjectURL(blobUrl);
+          }
+        } catch(e) { console.warn('QR fetch failed:', e); }
         const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
         triggerDownload(canvas, `Standee_${currentTheme.toUpperCase()}_${slug}_4x6.png`);
       });
 
       // Download All 3 Editions (1-Click Package)
-      document.getElementById('btnDownloadAll').addEventListener('click', () => {
+      document.getElementById('btnDownloadAll').addEventListener('click', async () => {
         const slug = name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
         const themes = ['classic', 'gold', 'platinum'];
-        themes.forEach((t, index) => {
-          setTimeout(() => {
-            const canvas = generateCanvasForTheme(t);
-            triggerDownload(canvas, `Standee_${(index + 1)}_${t.toUpperCase()}_${slug}_4x6.png`);
-          }, index * 400);
-        });
+        let qrBlobUrl = null;
+        try {
+          const qrUrl = window._qrApiUrl || '';
+          if (qrUrl) {
+            const resp = await fetch(qrUrl);
+            const blob = await resp.blob();
+            qrBlobUrl = URL.createObjectURL(blob);
+          }
+        } catch(e) { console.warn('QR fetch failed:', e); }
+        for (let index = 0; index < themes.length; index++) {
+          const t = themes[index];
+          const canvas = generateCanvasForTheme(t);
+          const ctx2 = canvas.getContext('2d');
+          if (qrBlobUrl) {
+            const qrImg2 = new Image();
+            await new Promise((res, rej) => { qrImg2.onload = res; qrImg2.onerror = rej; qrImg2.src = qrBlobUrl; });
+            ctx2.drawImage(qrImg2, 125, 440, 390, 390);
+          }
+          triggerDownload(canvas, `Standee_${index + 1}_${t.toUpperCase()}_${slug}_4x6.png`);
+          await new Promise(res => setTimeout(res, 700));
+        }
+        if (qrBlobUrl) URL.revokeObjectURL(qrBlobUrl);
       });
 
     })();
