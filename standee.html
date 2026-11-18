@@ -277,12 +277,28 @@
       justify-content: center;
       box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       flex-shrink: 0;
+      overflow: hidden;
+      box-sizing: border-box;
     }
 
-    #standeeQr canvas {
-      display: block;
+    #standeeQr {
+      width: 96px;
+      height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    #standeeQr canvas,
+    #standeeQr img {
+      display: block !important;
       width: 96px !important;
       height: 96px !important;
+      max-width: 96px !important;
+      max-height: 96px !important;
+      margin: 0 auto !important;
+      object-fit: contain !important;
     }
 
     .qr-text-col {
@@ -769,13 +785,13 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
 
       const targetUrl = `${base}/index.html?${reviewParams.toString()}`;
 
-      // Render High-Density Crisp QR
+      // Render High-Density Crisp QR (192x192 for sharp 2x Retina inside 96px frame)
       const qrContainer = document.getElementById('standeeQr');
       qrContainer.innerHTML = '';
       const qr = new QRCode(qrContainer, {
         text: targetUrl,
-        width: 300,
-        height: 300,
+        width: 192,
+        height: 192,
         colorDark: "#0f172a",
         colorLight: "#ffffff",
         correctLevel: (typeof QRCode !== 'undefined' && QRCode.CorrectLevel && QRCode.CorrectLevel.M !== undefined) ? QRCode.CorrectLevel.M : 0
@@ -929,7 +945,7 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
         ctx.fill();
         ctx.stroke();
 
-        const qrCanvas = qrContainer.querySelector('canvas');
+        const qrCanvas = qrContainer.querySelector('canvas') || qrContainer.querySelector('img');
         if (qrCanvas) {
           ctx.drawImage(qrCanvas, 125, 440, 390, 390);
         }

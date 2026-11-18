@@ -753,7 +753,7 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
       });
 
       btnDownloadPng.addEventListener('click', () => {
-        const canvas = qrOutput.querySelector('canvas');
+        const canvas = qrOutput.querySelector('canvas') || qrOutput.querySelector('img');
         if (!canvas) return;
 
         // Create high-res export canvas (1024x1024)
