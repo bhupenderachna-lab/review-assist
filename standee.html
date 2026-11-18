@@ -259,16 +259,17 @@
       border-radius: 14px;
       padding: 8px 14px;
       display: flex;
+      flex-direction: row;
       align-items: center;
-      justify-content: flex-start; /* STRICT LEFT ALIGNMENT: Identical to NFC Box */
+      justify-content: flex-start;
       gap: 14px;
-      min-height: 122px;
+      min-height: 160px;
     }
 
-    /* ENLARGED QR FRAME: 200px x 200px for easy phone scanning */
+    /* QR FRAME: matches ss1 layout - large enough to scan easily */
     .qr-frame {
-      width: 200px;
-      height: 200px;
+      width: 106px;
+      height: 106px;
       background: #ffffff;
       padding: 5px;
       border-radius: 12px;
@@ -282,24 +283,15 @@
     }
 
     #standeeQr {
-      width: 190px;
-      height: 190px;
+      width: 94px;
+      height: 94px;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
     }
 
-    #standeeQr canvas,
-    #standeeQr img {
-      display: block !important;
-      width: 96px !important;
-      height: 96px !important;
-      max-width: 96px !important;
-      max-height: 96px !important;
-      margin: 0 auto !important;
-      object-fit: contain !important;
-    }
+    
 
     .qr-text-col {
       display: flex;
@@ -319,7 +311,6 @@
       display: flex;
       align-items: center;
       gap: 6px;
-      white-space: nowrap;
     }
 
     /* Divider Bar with "OR" */
@@ -792,7 +783,7 @@ var QRCode;!function(){function a(a){this.mode=c.MODE_8BIT_BYTE,this.data=a,this
       const qrImg = document.createElement('img');
       qrImg.src = qrApiUrl;
       qrImg.alt = 'Scan to Review';
-      qrImg.style.cssText = 'width:190px;height:190px;display:block;border:none;';
+      qrImg.style.cssText = 'width:94px;height:94px;display:block;border:none;';
       qrContainer.appendChild(qrImg);
 
             // Preload user's NFC logo for 300 DPI Canvas downloads
